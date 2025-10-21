@@ -426,10 +426,28 @@ fun DataPointsList(points: List<ProctorDataPoint>, onRemove: (ProctorDataPoint) 
     AnimatedVisibility(visible = points.isNotEmpty()) {
         DataPanel(stringResource(R.string.data_points)) {
             Column {
+                // Table Header
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text("Moisture Content (%)", modifier = Modifier.weight(1f), fontWeight = FontWeight.Bold)
+                    Text("Dry Density (g/cm³)", modifier = Modifier.weight(1f), fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.width(48.dp)) // For delete button
+                }
+                Divider(modifier = Modifier.padding(vertical = 4.dp))
+
+                // Table Rows
                 points.forEach { point ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = "MC: ${point.moistureContent}%, Dry Density: ${String.format("%.3f", point.dryDensity)} g/cm³",
+                            text = "${point.moistureContent}",
+                            modifier = Modifier.weight(1f),
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                        Text(
+                            text = String.format("%.3f", point.dryDensity),
                             modifier = Modifier.weight(1f),
                             color = MaterialTheme.colorScheme.onBackground
                         )

@@ -35,7 +35,7 @@ import com.example.soillab.di.AppContainer
 import com.example.soillab.di.AppViewModelFactory
 import com.example.soillab.liquidlimittest.AtterbergCoreViewModel
 import com.example.soillab.liquidlimittest.AtterbergLimitsNeuralInterface
-import com.example.soillab.proctor.ProctorTestScreen
+import com.example.soillab.proctor.ProctorScreenImproved
 import com.example.soillab.proctor.ProctorViewModel
 import com.example.soillab.reports.ReportsHubScreen
 import com.example.soillab.reports.ReportsViewModel
@@ -223,7 +223,7 @@ fun SoilLabApp(appContainer: AppContainer, languageViewModel: LanguageViewModel)
                         reportIdToLoad = reportIdToEdit,
                         onNavigateBack = { coordinatorViewModel.goBack() }
                     )
-                    AppScreen.PROCTOR_TEST -> ProctorTestScreen(
+                    AppScreen.PROCTOR_TEST -> ProctorScreenImproved(
                         viewModel = proctorViewModel,
                         reportIdToLoad = reportIdToEdit,
                         onNavigateBack = { coordinatorViewModel.goBack() }
