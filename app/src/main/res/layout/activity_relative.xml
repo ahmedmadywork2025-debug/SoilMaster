@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <!-- عنوان الصفحة -->
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relative Density Test"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- بطاقة الإدخالات -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Sample Location"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSampleName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!-- Weight of Wet Soil + Container -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Weight of Wet Soil + Container (g)"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etWetSoilContainer"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Weight of Container -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Weight of Container (g)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etContainer"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Weight of Dry Soil -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Weight of Dry Soil (g)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDrySoil"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Volume of Cylinder -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Volume of Cylinder (cc)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etVolume"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Maximum Density -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Maximum Density (g/cc)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMaxDensity"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Minimum Density -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Minimum Density (g/cc)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMinDensity"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Required Compaction -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Required Compaction (%)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRequiredCompaction"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- زر الحساب -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCalculate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:textColor="@color/background"
+            android:textAllCaps="false"
+            app:cornerRadius="12dp"
+            app:backgroundTint="?attr/colorPrimary"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- زر المسح -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CLEAR"
+            android:textColor="@color/background"
+            android:textAllCaps="false"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/buttonBackground"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- TextView للنتائج -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="?attr/colorOnSurface"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Theme العام للتطبيق -->
+    <style name="Theme.SandConeTest2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- الألوان الأساسية -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/primaryText</item>
+
+        <!-- لون StatusBar -->
+        <item name="android:statusBarColor">@color/primaryVariant</item>
+
+        <!-- لون Background للواجهة -->
+        <item name="android:windowBackground">@color/background</item>
+
+        <!-- ألوان الأزرار (MaterialButton) -->
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+
+        <!-- ألوان TextView عامة -->
+        <item name="android:textColorPrimary">@color/primaryText</item>
+    </style>
+
+</resources>

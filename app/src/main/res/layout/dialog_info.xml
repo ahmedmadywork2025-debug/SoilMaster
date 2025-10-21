@@ -1,0 +1,73 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:gravity="center">
+
+    <!-- أيقونة التطبيق -->
+    <ImageView
+        android:id="@+id/info_icon"
+        android:src="@mipmap/icon01_foreground"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center" />
+
+    <!-- العنوان -->
+    <TextView
+        android:id="@+id/info_title"
+        android:text="Soil Master App"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <!-- زر فيسبوك -->
+    <Button
+        android:id="@+id/btn_facebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Facebook"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@mipmap/ic_facebook"
+        android:backgroundTint="@color/facebook_blue"
+        android:textColor="@color/white" />
+
+    <!-- زر لينكدإن -->
+    <Button
+        android:id="@+id/btn_linkedin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" LinkedIn"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@mipmap/ic_linkedin_foreground"
+        android:backgroundTint="@color/linkedin_blue"
+        android:textColor="@color/white" />
+
+    <!-- زر إرسال إيميل -->
+    <Button
+        android:id="@+id/btn_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Send Email"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@mipmap/ic_email_foreground"
+        android:backgroundTint="@color/orange"
+        android:textColor="@color/white" />
+    <!-- الوصف -->
+
+    <TextView
+        android:id="@+id/info_desc"
+        android:text="Programming by Ahmed Madi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/light_gray"
+        android:layout_marginTop="8dp"
+        android:gravity="center" />
+
+</LinearLayout>

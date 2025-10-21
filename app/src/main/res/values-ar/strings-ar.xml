@@ -1,0 +1,322 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">مختبر التربة</string>
+    <string name="compute">حساب</string>
+    <string name="load_example">تحميل مثال</string>
+    <string name="save">حفظ</string>
+    <string name="back">رجوع</string>
+    <string name="delete">حذف</string>
+    <string name="cancel">إلغاء</string>
+    <string name="ok">موافق</string>
+    <string name="more_info">المزيد من المعلومات</string>
+    <string name="confirm_deletion">تأكيد الحذف</string>
+    <string name="confirm_deletion_message">هذا الإجراء لا يمكن التراجع عنه. سيتم حذف سجل البيانات بشكل دائم.</string>
+    <string name="purge_record">حذف السجل</string>
+    <string name="search_hint">بحث برقم الجسّة أو العينة</string>
+    <string name="all">الكل</string>
+    <string name="sort_options">خيارات الفرز</string>
+    <string name="date_newest_first">التاريخ (الأحدث أولاً)</string>
+    <string name="date_oldest_first">التاريخ (الأقدم أولاً)</string>
+    <string name="bh_no_az">رقم الجسّة (أ-ي)</string>
+    <string name="bh_no_za">رقم الجسّة (ي-أ)</string>
+    <string name="no_reports_found">لا توجد تقارير في أرشيف البيانات.</string>
+    <string name="load_data">تحميل البيانات</string>
+    <string name="select_language">اختر اللغة</string>
+    <string name="english">English</string>
+    <string name="arabic">العربية</string>
+
+    <!-- Hub Screen -->
+    <string name="hub_atterberg">حدود أتربرج</string>
+    <string name="hub_cbr">اختبار CBR</string>
+    <string name="hub_reports">التقارير</string>
+    <string name="hub_sieve">التحليل المنخلي</string>
+    <string name="module_offline">الوحدة غير متصلة.</string>
+    <string name="hub_proctor">بروكتور</string>
+    <string name="hub_field_density">الكثافة الحقلية</string>
+    <string name="hub_drilling_log">سجل الحفر</string>
+    <string name="hub_swell_test">اختبار الانتفاخ</string>
+
+
+    <!-- Boot Screen -->
+    <string name="boot_os">إقلاع نظام Geo-Core...</string>
+    <string name="boot_neural">تهيئة الواجهة العصبية...</string>
+    <string name="boot_sensors">معايرة المستشعرات الكمومية...</string>
+    <string name="boot_models">تحميل النماذج الجيوتقنية...</string>
+    <string name="boot_ready">النظام جاهز.</string>
+
+    <!-- Test Info Section -->
+    <string name="project_identifiers">معلومات المشروع والعينة</string>
+    <string name="location_bh">الموقع/الجسّة</string>
+    <string name="sample_no">رقم العينة</string>
+    <string name="sample_description">وصف العينة</string>
+    <string name="tested_by">تم الاختبار بواسطة</string>
+    <string name="checked_by">تم التدقيق بواسطة</string>
+
+    <!-- Atterberg Limits Screen -->
+    <string name="atterberg_title">تحليل حدود أتربرج</string>
+    <string name="liquid_limit_input">حد السيولة // إدخال البيانات</string>
+    <string name="plastic_limit_input">حد اللدونة // إدخال البيانات</string>
+    <string name="info_awaiting_data_atterberg">أدخل البيانات لبدء التحليل أو قم بتحميل مثال.</string>
+    <string name="sample_id">عينة %1$d</string>
+    <string name="sample_id_short">#%1$d</string>
+    <string name="blows">عدد الضربات</string>
+    <string name="water_content_percent">المحتوى المائي %%</string>
+    <string name="add_ll_sample">إضافة عينة سيولة</string>
+    <string name="add_pl_sample">إضافة عينة لدونة</string>
+    <string name="analysis_results">نتائج التحليل المعرفي</string>
+    <string name="liquid_limit">حد السيولة</string>
+    <string name="plastic_limit">حد اللدونة</string>
+    <string name="plasticity_index">مؤشر اللدونة</string>
+    <string name="soil_classification">تصنيف التربة</string>
+    <string name="correlation_r2">معامل الارتباط (R²)</string>
+    <string name="flow_curve_analysis">تحليل منحنى الانسياب</string>
+    <string name="plasticity_chart_analysis">تحليل مخطط اللدونة</string>
+    <string name="advanced_geo_insights">رؤى جيوتقنية متقدمة</string>
+    <string name="behavior_analysis">تحليل السلوك</string>
+    <string name="engineering_properties">الخواص الهندسية</string>
+    <string name="recommendations">التوصيات</string>
+    <string name="quality_assessment">تقييم الجودة</string>
+
+    <!-- CBR Screen -->
+    <string name="cbr_title">تحليل اختبار CBR</string>
+    <string name="cbr_input_parameters">معلومات الاختبار وإدخال البيانات</string>
+    <string name="penetration_mm">الاختراق (ملم)</string>
+    <string name="dial_reading">قراءة المؤشر (ملم)</string>
+    <string name="proving_ring_factor">معامل حلقة التحميل (كيلونيوتن/ملم)</string>
+    <string name="add_point">إضافة</string>
+    <string name="moisture_percent">الرطوبة (%%)</string>
+    <string name="dry_density">الكثافة الجافة (طن/م³)</string>
+    <string name="surcharge_kg">الحمل الإضافي (كجم)</string>
+    <string name="soaking_days">الغمر (أيام)</string>
+    <string name="data_points">نقاط البيانات</string>
+    <string name="cbr_analysis_results">نتائج التحليل</string>
+    <string name="final_cbr_value">قيمة CBR النهائية</string>
+    <string name="cbr_at_2_5">CBR @ 2.5 ملم</string>
+    <string name="cbr_at_5_0">CBR @ 5.0 ملم</string>
+    <string name="load_at_2_5">الحمل @ 2.5 ملم</string>
+    <string name="load_at_5_0">الحمل @ 5.0 ملم</string>
+    <string name="curve_corrected">تم تصحيح المنحنى</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="cbr_engineering_properties">الخصائص الهندسية</string>
+    <string name="soil_quality_rating">تقييم جودة التربة:</string>
+    <string name="curve_interpretation">تفسير المنحنى</string>
+    <string name="est_resilient_modulus">معامل المرونة التقديري (Mr)</string>
+    <string name="est_shear_strength">مقاومة القص التقديرية (Su)</string>
+    <string name="est_subgrade_modulus">معامل رد فعل التربة (k)</string>
+    <string name="primary_recommendation">التوصية الأساسية</string>
+    <string name="info_awaiting_data_cbr">أدخل معلومات العينة وبيانات الاختبار لبدء التحليل.</string>
+    <string name="data_point_display">اختراق: %1$.2f مم، حمل: %2$.3f كيلونيوتن</string>
+    <string name="required_cbr">CBR المطلوب (%%)</string>
+    <string name="pass">ناجح</string>
+    <string name="fail">راسب</string>
+    <string name="test_purpose_label">غرض الاختبار</string>
+    <string name="purpose_subgrade">طبقة القاعدة الترابية</string>
+    <string name="purpose_subbase">طبقة تحت الأساس</string>
+    <string name="purpose_base_course">طبقة الأساس</string>
+
+    <!-- Proctor Test Screen -->
+    <string name="proctor_title">تحليل اختبار بروكتور</string>
+    <string name="proctor_setup_title">إعدادات الاختبار</string>
+    <string name="proctor_test_type_label">نوع الاختبار</string>
+    <string name="proctor_standard">بروكتور قياسي</string>
+    <string name="proctor_modified">بروكتور معدل</string>
+    <string name="proctor_mold_weight_g">وزن القالب (جم)</string>
+    <string name="proctor_mold_volume_cm3">حجم القالب (سم³)</string>
+    <string name="proctor_specific_gravity">الوزن النوعي (Gs)</string>
+    <string name="proctor_data_entry_title">إدخال نقاط الاختبار</string>
+    <string name="proctor_wet_soil_mold_g">وزن التربة الرطبة + القالب (جم)</string>
+    <string name="proctor_moisture_content_percent">المحتوى المائي (%%)</string>
+    <string name="proctor_results_title">نتائج الاختبار</string>
+    <string name="proctor_mdd">الكثافة الجافة القصوى (MDD)</string>
+    <string name="proctor_omc">المحتوى المائي الأمثل (OMC)</string>
+    <string name="proctor_field_sim_title">محاكي الدمك الميداني</string>
+    <string name="proctor_field_mc_percent">المحتوى المائي في الموقع (%%)</string>
+    <string name="proctor_achievable_density">الكثافة الجافة الممكن تحقيقها</string>
+    <string name="proctor_required_compaction">نسبة الدمك المطلوبة (%%)</string>
+    <string name="proctor_acceptable_mc_range">نطاق المحتوى المائي المقبول</string>
+    <string name="proctor_predicted_cbr">CBR المتوقع بعد الغمر</string>
+    <string name="proctor_swell_potential">احتمالية الانتفاخ</string>
+
+
+    <!-- Sieve Analysis Screen -->
+    <string name="sieve_title">التحليل المنخلي والتصنيف</string>
+    <string name="sieve_classify_button">احسب وصنّف مع GeoMind 3025</string>
+    <string name="sieve_classification_params">معلومات التصنيف</string>
+    <string name="sieve_initial_weight_g">الوزن الجاف الأولي (جم)</string>
+    <string name="sieve_retained_weights">الأوزان المحجوزة التراكمية</string>
+    <string name="sieve_retained_weight_g">المحجوز (جم)</string>
+    <string name="sieve_gradation_curve">منحنى التدرج الحبيبي</string>
+    <string name="sieve_summary_properties">ملخص الخصائص</string>
+    <string name="sieve_percent_gravel">حصى (%%)</string>
+    <string name="sieve_percent_sand">رمل (%%)</string>
+    <string name="sieve_percent_fines">مواد ناعمة (%%)</string>
+    <string name="sieve_cu">معامل الانتظام (Cu)</string>
+    <string name="sieve_cc">معامل التدرج (Cc)</string>
+    <string name="sieve_fineness_modulus">معامل النعومة (FM)</string>
+    <string name="sieve_material_loss">فاقد المواد</string>
+    <string name="sieve_ai_commentary">التعليق الهندسي الذكي</string>
+    <string name="sieve_ai_recommendation">الاستخدام الموصى به</string>
+    <string name="info_sieve_automatic">يتم حساب النتائج تلقائياً. أدخل حدود أتربرج للحصول على التصنيف الكامل.</string>
+    <string name="sieve_header_name">المنخل</string>
+    <string name="sieve_header_retained">المحجوز التراكمي (جم)</string>
+    <string name="sieve_header_cum_retained">%% التراكمي</string>
+    <string name="sieve_header_passing">%% المار</string>
+    <string name="spec_compare_title">مقارنة بالمواصفات:</string>
+    <string name="spec_select">اختر مواصفة</string>
+    <string name="spec_none">لا شيء</string>
+    <string name="spec_saudi_base_a">مواصفات النقل - طبقة أساس (A)</string>
+    <string name="spec_saudi_subbase">مواصفات النقل - تحت الأساس</string>
+    <string name="spec_astm_c33_fine">ASTM C33 - ركام ناعم</string>
+    <string name="spec_astm_c33_57">ASTM C33 - ركام خشن #57</string>
+    <string name="spec_astm_c33_67">ASTM C33 - ركام خشن #67</string>
+    <string name="spec_superpave_19">Superpave (19.0mm NMAS)</string>
+    <string name="frost_susceptibility">القابلية للتأثر بالصقيع</string>
+    <string name="est_permeability">النفاذية التقديرية (k)</string>
+    <string name="sample_type_label">نوع العينة</string>
+    <string name="sample_type_soil">تربة</string>
+    <string name="sample_type_aggregate">ركام</string>
+    <string name="spec_custom">تعريف مواصفة خاصة...</string>
+    <string name="custom_spec_panel_title">محرر المواصفات الخاصة</string>
+    <string name="spec_name_label">اسم المواصفة</string>
+    <string name="save_spec">حفظ المواصفة</string>
+    <string name="min_passing">أقل نسبة مار %%</string>
+    <string name="max_passing">أعلى نسبة مار %%</string>
+    <string name="prediction_panel_title">التنبؤات الهندسية الذكية</string>
+    <string name="predicted_omc">المحتوى المائي الأمثل المتوقع</string>
+    <string name="predicted_mdd">الكثافة الجافة القصوى المتوقعة</string>
+    <string name="predicted_cbr">قيمة CBR التقريبية المتوقعة</string>
+
+
+    <!-- ViewModel Messages -->
+    <string name="error_invalid_numbers">الرجاء إدخال أرقام صالحة.</string>
+    <string name="error_at_least_two_points">مطلوب نقطتان على الأقل للحساب.</string>
+    <string name="error_insufficient_range">لا يمكن الحساب. نطاق الاختراق غير كافٍ.</string>
+    <string name="error_fill_info_and_compute">الرجاء إكمال معلومات العينة وحساب النتائج أولاً.</string>
+    <string name="success_report_saved">✅ تم حفظ التقرير بنجاح في قائمة التقارير.</string>
+    <string name="example_data_loaded">تم تحميل بيانات المثال. اضغط على \'حساب\'.</string>
+    <string name="error_loading_report">خطأ: تعذر تحميل التقرير.</string>
+    <string name="error_spec_name_empty">لا يمكن ترك اسم المواصفة فارغًا.</string>
+    <string name="error_spec_limits_empty">الرجاء تحديد حد واحد على الأقل للمواصفة.</string>
+    <string name="success_spec_saved">تم حفظ المواصفة الخاصة بنجاح!</string>
+
+    <!-- Reports Hub -->
+    <string name="reports_hub_title">مركز بيانات التقارير</string>
+    <string name="atterberg_reports">تقارير حدود أتربرج</string>
+    <string name="cbr_reports">تقارير اختبار CBR</string>
+    <string name="sieve_reports">تقارير التحليل المنخلي</string>
+    <string name="proctor_reports">تقارير بروكتور</string>
+    <string name="report_card_bh">جسّة: %1$s / عينة: %2$s</string>
+    <string name="report_card_date">التاريخ: %1$s</string>
+    <string name="report_card_class">التصنيف</string>
+    <string name="report_card_ll">LL</string>
+    <string name="report_card_pi">PI</string>
+    <string name="report_card_final_cbr">CBR النهائي</string>
+    <string name="report_card_quality">الجودة</string>
+
+    <!-- Soil Logic & AI Analysis -->
+    <string name="soil_cl">طين منخفض اللدونة</string>
+    <string name="desc_cl">طين منخفض إلى متوسط اللدونة</string>
+    <string name="soil_ml">طمي</string>
+    <string name="desc_ml">طمي منخفض اللدونة</string>
+    <string name="soil_cl_ml">طين طميي</string>
+    <string name="desc_cl_ml">خليط من الطمي والطين</string>
+    <string name="soil_ch">طين عالي اللدونة</string>
+    <string name="desc_ch">طين عالي اللدونة</string>
+    <string name="soil_mh">طمي مرن</string>
+    <string name="desc_mh">طمي عالي اللدونة</string>
+
+    <string name="rec_general_cat">عام</string>
+    <string name="rec_general_desc">اتبع الإجراءات القياسية.</string>
+
+    <string name="quality_improvement_rec">زد عدد النقاط لموثوقية أعلى.</string>
+
+    <string name="cbr_calc_success">تم الحساب بنجاح.</string>
+    <string name="cbr_calc_warning_5mm">تحذير: قيمة CBR عند 5.0 ملم أعلى. يوصى بإعادة الاختبار.</string>
+
+    <string name="cbr_rating_excellent">ممتاز</string>
+    <string name="cbr_rating_very_good">جيد جدًا</string>
+    <string name="cbr_rating_good">جيد</string>
+    <string name="cbr_rating_fair">مقبول</string>
+    <string name="cbr_rating_poor">ضعيف</string>
+    <string name="cbr_rating_very_poor">ضعيف جدًا</string>
+
+    <string name="cbr_interp_corrected">تم تصحيح المنحنى، مما قد يشير إلى مشاكل في تثبيت العينة أو سطح غير منتظم.</string>
+    <string name="cbr_interp_stopped_early">توقف الاختبار مبكرًا. يستمر الاختبار القياسي عادةً إلى اختراق 7.5 ملم على الأقل.</string>
+    <string name="cbr_interp_normal">يُظهر المنحنى شكلاً نموذجيًا لمادة جيدة الدمك بدون أي شذوذ كبير.</string>
+
+    <string name="cbr_rec_excellent">مادة ممتازة للاستخدام كطبقة أساس أو تحت الأساس في إنشاءات الرصف.</string>
+    <string name="cbr_rec_good">مناسبة للاستخدام كطبقة تحت الأساس أو تربة تحتية عالية الجودة. يُتوقع أداء جيد بشكل عام.</string>
+    <string name="cbr_rec_fair">مقبولة للاستخدام كتربة تحتية عامة، ولكنها قد تتطلب تثبيتًا لأحمال المرور الثقيلة.</string>
+    <string name="cbr_rec_poor">تربة تحتية منخفضة القوة. غير مناسبة للتأسيس المباشر. ضع في اعتبارك تحسين التربة أو استبدالها.</string>
+    <string name="cbr_rec_very_poor">تربة ضعيفة جدًا. مطلوب تدخل هندسي كبير (مثل الاستبدال أو التثبيت العميق).</string>
+
+    <!-- Example Data Descriptions -->
+    <string name="example_desc_cl">مثال: طين منخفض اللدونة (CL)</string>
+    <string name="example_desc_ch">مثال: طين عالي اللدونة (CH)</string>
+    <string name="example_desc_ml">مثال: طمي (ML)</string>
+    <string name="example_desc_cbr_good_subbase">مثال: مادة أساس ذات جودة جيدة</string>
+    <string name="example_desc_cbr_soft_clay">مثال: تربة تحتية طينية لينة</string>
+    <string name="example_desc_cbr_correction">مثال: مادة تتطلب تصحيح المنحنى</string>
+    <string name="example_desc_proctor_sc">مثال: رمل طيني (SC)</string>
+    <string name="example_desc_proctor_cl">مثال: طين منخفض اللدونة (CL)</string>
+    <string name="example_desc_proctor_gw">مثال: حصى جيد التدرج (GW)</string>
+
+    <!-- USCS Descriptions -->
+    <string name="uscs_desc_gw">حصى جيد التدرج</string>
+    <string name="uscs_desc_gp">حصى سيئ التدرج</string>
+    <string name="uscs_desc_gm">حصى طميي</string>
+    <string name="uscs_desc_gc">حصى طيني</string>
+    <string name="uscs_desc_sw">رمل جيد التدرج</string>
+    <string name="uscs_desc_sp">رمل سيئ التدرج</string>
+    <string name="uscs_desc_sm">رمل طميي</string>
+    <string name="uscs_desc_sc">رمل طيني</string>
+    <string name="uscs_desc_dual">تربة خشنة ذات تصنيف مزدوج</string>
+
+    <!-- Frost Susceptibility -->
+    <string name="frost_neg">ضئيلة</string>
+    <string name="frost_low">منخفضة</string>
+    <string name="frost_medium">متوسطة</string>
+    <string name="frost_high">عالية</string>
+    <string name="frost_v_high">عالية جدًا</string>
+
+    <!-- Dynamic AI Commentary -->
+    <string name="commentary_well_graded">المادة جيدة التدرج، مما يشير إلى توزيع جيد لأحجام الحبيبات يؤدي عادةً إلى تحسين الدمك والاستقرار.</string>
+    <string name="commentary_poorly_graded">المادة سيئة التدرج (منتظمة أو ذات فجوة). قد يؤدي هذا إلى نفاذية أعلى واستقرار أقل مقارنة بالتربة جيدة التدرج.</string>
+    <string name="commentary_high_plasticity">تُظهر التربة لدونة عالية. يشير هذا إلى محتوى عالٍ من الطين، مما قد يؤدي إلى تغيرات حجمية كبيرة (انتفاخ/انكماش) مع تغيرات المحتوى المائي.</string>
+    <string name="commentary_low_plasticity">تُظهر التربة لدونة منخفضة، مما يشير إلى أنها أكثر استقرارًا مع تغيرات المحتوى المائي مقارنة بالطين عالي اللدونة.</string>
+    <string name="commentary_sandy_fines">العينة عبارة عن تربة رملية تحتوي على كمية كبيرة من المواد الناعمة (طمي/طين). سيتأثر سلوكها بكل من هيكل الرمل ولدونة المواد الناعمة.</string>
+
+    <!-- Info Tooltips -->
+    <string name="info_d10_title">D10 (المقاس الفعال)</string>
+    <string name="info_d10_content">قطر الحبيبات الذي يكون 10% من التربة أنعم منه. وهو مؤشر رئيسي لنفاذية التربة وقابليتها للتعرية.</string>
+    <string name="info_d30_title">D30</string>
+    <string name="info_d30_content">قطر الحبيبات الذي يكون 30% من التربة أنعم منه. يُستخدم بشكل أساسي في حساب معامل التدرج (Cc).</string>
+    <string name="info_d60_title">D60</string>
+    <string name="info_d60_content">قطر الحبيبات الذي يكون 60% من التربة أنعم منه. يُستخدم مع D10 لتحديد معامل الانتظام (Cu).</string>
+    <string name="info_cu_title">Cu (معامل الانتظام)</string>
+    <string name="info_cu_content">يُحسب كـ D60 / D10. قيمة > 4 (للحصى) أو > 6 (للرمل) تشير إلى تربة جيدة التدرج ذات نطاق واسع من أحجام الحبيبات.</string>
+    <string name="info_cc_title">Cc (معامل التدرج)</string>
+    <string name="info_cc_content">يُحسب كـ (D30)² / (D10 * D60). قيمة بين 1 و 3 تشير إلى منحنى تدرج ناعم ومستمر، وهو شرط للتربة جيدة التدرج.</string>
+    <string name="info_fm_title">FM (معامل النعومة)</string>
+    <string name="info_fm_content">مؤشر لنعومة الركام. يُحسب بجمع النسب المئوية التراكمية المحجوزة على سلسلة مناخل محددة وقسمة المجموع على 100. يُستخدم بشكل أساسي للركام الناعم في تصميم الخلطات الخرسانية.</string>
+    <string name="info_prediction_title">تنبؤ ذكي</string>
+    <string name="info_prediction_content">هذه القيمة هي تقدير تم إنشاؤه بواسطة GeoMind 3025 باستخدام نماذج الانحدار الخطي المتعدد (MLR). تعتمد هذه النماذج على علاقات تجريبية منشورة علميًا في الأدبيات الجيوتقنية، والتي تربط الخصائص الاستدلالية (التدرج، حدود أتربرج) بالسلوك الهندسي. يوفر هذا تقييمًا أوليًا موثوقًا ولكنه لا يحل محل الاختبارات المعملية للتصميم النهائي.</string>
+    <string name="info_final_cbr_title">قيمة CBR النهائية</string>
+    <string name="info_final_cbr_content">نسبة تحمل كاليفورنيا (CBR) هي اختبار اختراق لتقييم القوة الميكانيكية لطبقات القاعدة الترابية والأساس. تكون القيمة النهائية عادة هي قيمة CBR عند اختراق 2.5 مم، إلا إذا كانت القيمة عند 5.0 مم أعلى، وفي هذه الحالة يجب إعادة الاختبار.</string>
+    <string name="info_corrected_title">تصحيح المنحنى</string>
+    <string name="info_corrected_content">يتم تطبيق التصحيح عندما يكون الجزء الأولي من المنحنى مقعراً، مما يشير إلى عدم انتظام السطح أو مشاكل في تثبيت العينة. يتم رسم خط مماس من أكثر أجزاء المنحنى انحداراً، ويصبح تقاطعه مع المحور السيني هو نقطة الصفر الجديدة لقراءات الاختراق.</string>
+    <string name="info_mr_title">معامل المرونة (Mr)</string>
+    <string name="info_mr_content">تقدير لصلابة المادة، وهو أمر حاسم في تصميم الرصف المرن. يتم التنبؤ به من CBR باستخدام علاقات تجريبية (على سبيل المثال، Mr (psi) = 1500 * CBR). هذا يوفر قيمة أولية للتصميم.</string>
+    <string name="info_su_title">مقاومة القص غير المصرف (Su)</string>
+    <string name="info_su_content">بالنسبة للتربة المتماسكة، يمكن لـ CBR تقديم تقدير لمقاومة القص غير المصرف، والتي تمثل مقاومة التربة لانهيار القص تحت حجم ثابت. من العلاقات الشائعة: Su (kPa) ≈ 20 * CBR.</string>
+    <string name="info_k_title">معامل رد فعل التربة (k)</string>
+    <string name="info_k_content">معامل رئيسي لتصميم الرصف الصلب، يمثل الدعم الذي توفره طبقة القاعدة الترابية. يربط بين الضغط على القاعدة الترابية ومقدار هبوطها. غالبًا ما يتم تقديره من CBR لأغراض التصميم الأولية.</string>
+    <string name="info_gs_title">أهمية الوزن النوعي (Gs)</string>
+    <string name="info_gs_content">هذه القيمة حاسمة لضبط الجودة. تُستخدم لحساب ورسم منحنى نسبة الفراغات الهوائية الصفرية (ZAV). يمثل هذا المنحنى الحد النظري الأقصى للكثافة. يجب أن يقع منحنى الدمك الفعلي دائماً أسفل هذا الخط؛ إذا تقاطع معه أو تجاوزه، فهذا يشير إلى وجود خطأ في بيانات الاختبار أو في قيمة Gs المفترضة.</string>
+    <string name="info_swell_title">احتمالية الانتفاخ</string>
+    <string name="info_swell_content">تقدير لميل التربة لزيادة حجمها (الانتفاخ) عند تعرضها للرطوبة. يتأثر بشكل أساسي بنوع وكمية معادن الطين (اللدونة) والكثافة الجافة الأولية. يمكن أن يتسبب الانتفاخ العالي في أضرار جسيمة للمنشآت.</string>
+
+
+</resources>
+

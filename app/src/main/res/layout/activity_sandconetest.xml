@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <!-- عنوان الصفحة -->
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sand Cone Test"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- بطاقة الإدخالات -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <!-- Location -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Location of Test Hole"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/locationInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Weight of Soil -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Weight of Soil (g)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/soilWeightInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Wt. of Sand + Container Before -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Wt. of Sand + Container Before (g)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sandContainerInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Wt. of Sand + Container After -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Wt. of Sand + Container After (g)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sandAfterInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Sand Added to Cone -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Sand Added to Cone (g)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sandAddedInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Unit Weight of Sand -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Unit Weight of Sand (g/cm³)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/unitWeightInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Water Content -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Water Content (%)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/waterContentInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Maximum Dry Density (Lab) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Maximum Dry Density (Lab)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="?attr/colorSecondary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/maxDryLabInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- زر حساب النتائج -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/calculateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:textColor="@color/background"
+            android:textAllCaps="false"
+            android:layout_marginBottom="24dp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="?attr/colorPrimary"/>
+
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="1dp"
+            android:text="CLEAR"
+            android:textColor="@color/background"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></Button>
+
+        <!-- النتائج داخل بطاقة -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/volumeHoleOutput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Volume Hole: 0.0"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:padding="4dp"/>
+
+                <TextView
+                    android:id="@+id/maxDryOutput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Max Dry: 0.0"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:padding="4dp"/>
+
+                <TextView
+                    android:id="@+id/maxDryLabOutput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Max Dry Lab: 0.0"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:padding="4dp"/>
+
+                <TextView
+                    android:id="@+id/relativeCompactionOutput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Relative Compaction: 0.0%"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:padding="4dp"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

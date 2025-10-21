@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <!-- عنوان الصفحة -->
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CBR Test App"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:textColor="@color/cardTextColor"
+            android:background="@drawable/rounded_title_background"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp"
+            android:textAlignment="center"/>
+
+        <!-- بطاقة الإدخالات -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <!-- Sample Info -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Sample Location"
+                    app:hintTextColor="@color/primaryColor">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sampleLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Company Name"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="@color/primaryColor">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/companyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Test Date"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="@color/primaryColor">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/testDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Inputs -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Penetration (mm)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="@color/primaryColor">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/penInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Load (kN)"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="@color/primaryColor">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/loadInput"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Buttons Add / Clear -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/addPointBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Add Point"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="@color/buttonText"
+                        android:textAllCaps="false"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/clearAllBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Clear All"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/rounded_button_secondary"
+                        android:textColor="@color/buttonText"
+                        android:textAllCaps="false"/>
+                </LinearLayout>
+
+                <!-- RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/pointsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <!-- LineChart -->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="16dp"/>
+
+                <!-- Reference Loads -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ref @2.5 mm"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="@color/primaryColor">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ref2_5"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ref @5.0 mm"
+                    android:layout_marginTop="12dp"
+                    app:hintTextColor="@color/primaryColor">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ref5_0"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Action Buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/computeBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Compute CBR"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="@color/buttonText"
+                        android:textAllCaps="false"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/loadExampleBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Load Example"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/rounded_button_secondary"
+                        android:textColor="@color/buttonText"
+                        android:textAllCaps="false"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/savePdfBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Save PDF"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="@color/buttonText"
+                        android:textAllCaps="false"/>
+                </LinearLayout>
+
+                <!-- Result -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/messageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Result will appear here"
+                    android:paddingTop="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/primaryText"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,322 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">Soil Lab</string>
+    <string name="compute">Compute</string>
+    <string name="load_example">Load Example</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="more_info">More Info</string>
+    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="confirm_deletion_message">This action is irreversible. The data record will be permanently purged.</string>
+    <string name="purge_record">Purge Record</string>
+    <string name="search_hint">Search by BH or Sample No.</string>
+    <string name="all">All</string>
+    <string name="sort_options">Sort Options</string>
+    <string name="date_newest_first">Date (Newest First)</string>
+    <string name="date_oldest_first">Date (Oldest First)</string>
+    <string name="bh_no_az">BH No. (A-Z)</string>
+    <string name="bh_no_za">BH No. (Z-A)</string>
+    <string name="no_reports_found">No reports found in the data archive.</string>
+    <string name="load_data">Load Data</string>
+    <string name="select_language">Select Language</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+
+    <!-- Hub Screen -->
+    <string name="hub_atterberg">Atterberg Limits</string>
+    <string name="hub_cbr">CBR Test</string>
+    <string name="hub_reports">Reports</string>
+    <string name="hub_sieve">Sieve Analysis</string>
+    <string name="module_offline">Module offline.</string>
+    <string name="hub_proctor">Proctor</string>
+    <string name="hub_field_density">Field Density</string>
+    <string name="hub_drilling_log">Drilling Log</string>
+    <string name="hub_swell_test">Swell Test</string>
+
+
+    <!-- Boot Screen -->
+    <string name="boot_os">Booting Geo-Core OS...</string>
+    <string name="boot_neural">Initializing Neural Interface...</string>
+    <string name="boot_sensors">Calibrating Quantum Sensors...</string>
+    <string name="boot_models">Loading Geotechnical Models...</string>
+    <string name="boot_ready">System Ready.</string>
+
+    <!-- Test Info Section -->
+    <string name="project_identifiers">Project &amp; Sample Identifiers</string>
+    <string name="location_bh">Location/BH</string>
+    <string name="sample_no">Sample No.</string>
+    <string name="sample_description">Sample Description</string>
+    <string name="tested_by">Tested By</string>
+    <string name="checked_by">Checked By</string>
+
+    <!-- Atterberg Limits Screen -->
+    <string name="atterberg_title">Atterberg Limits Analysis</string>
+    <string name="liquid_limit_input">Liquid Limit // Data Input</string>
+    <string name="plastic_limit_input">Plastic Limit // Data Input</string>
+    <string name="info_awaiting_data_atterberg">Enter data to begin analysis or load an example.</string>
+    <string name="sample_id">Sample %1$d</string>
+    <string name="sample_id_short">#%1$d</string>
+    <string name="blows">Blows</string>
+    <string name="water_content_percent">Water Content %%</string>
+    <string name="add_ll_sample">Add LL Sample</string>
+    <string name="add_pl_sample">Add PL Sample</string>
+    <string name="analysis_results">Cognitive Analysis Results</string>
+    <string name="liquid_limit">Liquid Limit</string>
+    <string name="plastic_limit">Plastic Limit</string>
+    <string name="plasticity_index">Plasticity Index</string>
+    <string name="soil_classification">Soil Classification</string>
+    <string name="correlation_r2">Correlation (R²)</string>
+    <string name="flow_curve_analysis">Flow Curve Analysis</string>
+    <string name="plasticity_chart_analysis">Plasticity Chart Analysis</string>
+    <string name="advanced_geo_insights">Advanced Geotechnical Insights</string>
+    <string name="behavior_analysis">Behavior Analysis</string>
+    <string name="engineering_properties">Engineering Properties</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="quality_assessment">Quality Assessment</string>
+
+    <!-- CBR Screen -->
+    <string name="cbr_title">CBR Test Analysis</string>
+    <string name="cbr_input_parameters">Test Parameters &amp; Data Input</string>
+    <string name="penetration_mm">Penetration (mm)</string>
+    <string name="dial_reading">Dial Reading (mm)</string>
+    <string name="proving_ring_factor">Proving Ring Factor (kN/mm)</string>
+    <string name="add_point">Add</string>
+    <string name="moisture_percent">Moisture (%%)</string>
+    <string name="dry_density">Dry Density (t/m³)</string>
+    <string name="surcharge_kg">Surcharge (kg)</string>
+    <string name="soaking_days">Soaking (days)</string>
+    <string name="data_points">Data Points</string>
+    <string name="cbr_analysis_results">Analysis Results</string>
+    <string name="final_cbr_value">Final CBR Value</string>
+    <string name="cbr_at_2_5">CBR @ 2.5mm</string>
+    <string name="cbr_at_5_0">CBR @ 5.0mm</string>
+    <string name="load_at_2_5">Load @ 2.5mm</string>
+    <string name="load_at_5_0">Load @ 5.0mm</string>
+    <string name="curve_corrected">Curve Corrected</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cbr_engineering_properties">Engineering Properties</string>
+    <string name="soil_quality_rating">Soil Quality Rating:</string>
+    <string name="curve_interpretation">Curve Interpretation</string>
+    <string name="est_resilient_modulus">Est. Resilient Modulus (Mr)</string>
+    <string name="est_shear_strength">Est. Shear Strength (Su)</string>
+    <string name="est_subgrade_modulus">Est. Subgrade Modulus (k)</string>
+    <string name="primary_recommendation">Primary Recommendation</string>
+    <string name="info_awaiting_data_cbr">Enter sample information and test data to begin analysis.</string>
+    <string name="data_point_display">Pen: %1$.2f mm, Load: %2$.3f kN</string>
+    <string name="required_cbr">Required CBR (%%)</string>
+    <string name="pass">PASS</string>
+    <string name="fail">FAIL</string>
+    <string name="test_purpose_label">Test Purpose</string>
+    <string name="purpose_subgrade">Subgrade</string>
+    <string name="purpose_subbase">Sub-base</string>
+    <string name="purpose_base_course">Base Course</string>
+
+    <!-- Proctor Test Screen -->
+    <string name="proctor_title">Proctor Test Analysis</string>
+    <string name="proctor_setup_title">Test Setup</string>
+    <string name="proctor_test_type_label">Test Type</string>
+    <string name="proctor_standard">Standard Proctor</string>
+    <string name="proctor_modified">Modified Proctor</string>
+    <string name="proctor_mold_weight_g">Mold Weight (g)</string>
+    <string name="proctor_mold_volume_cm3">Mold Volume (cm³)</string>
+    <string name="proctor_specific_gravity">Specific Gravity (Gs)</string>
+    <string name="proctor_data_entry_title">Test Points Entry</string>
+    <string name="proctor_wet_soil_mold_g">Wet Soil + Mold (g)</string>
+    <string name="proctor_moisture_content_percent">Moisture Content (%%)</string>
+    <string name="proctor_results_title">Test Results</string>
+    <string name="proctor_mdd">Max Dry Density (MDD)</string>
+    <string name="proctor_omc">Optimum Moisture Content (OMC)</string>
+    <string name="proctor_field_sim_title">Field Compaction Simulator</string>
+    <string name="proctor_field_mc_percent">Field Moisture Content (%%)</string>
+    <string name="proctor_achievable_density">Achievable Dry Density</string>
+    <string name="proctor_required_compaction">Required Compaction (%)</string>
+    <string name="proctor_acceptable_mc_range">Acceptable MC Range</string>
+    <string name="proctor_predicted_cbr">Predicted Soaked CBR</string>
+    <string name="proctor_swell_potential">Swell Potential</string>
+
+
+    <!-- Sieve Analysis Screen -->
+    <string name="sieve_title">Sieve Analysis &amp; Classification</string>
+    <string name="sieve_classify_button">Calculate &amp; Classify with GeoMind 3025</string>
+    <string name="sieve_classification_params">Classification Parameters</string>
+    <string name="sieve_initial_weight_g">Initial Dry Weight (g)</string>
+    <string name="sieve_retained_weights">Cumulative Retained Weights</string>
+    <string name="sieve_retained_weight_g">Retained (g)</string>
+    <string name="sieve_gradation_curve">Particle Size Distribution Curve</string>
+    <string name="sieve_summary_properties">Summary Properties</string>
+    <string name="sieve_percent_gravel">Gravel (%%)</string>
+    <string name="sieve_percent_sand">Sand (%%)</string>
+    <string name="sieve_percent_fines">Fines (%%)</string>
+    <string name="sieve_cu">Coefficient of Uniformity (Cu)</string>
+    <string name="sieve_cc">Coefficient of Curvature (Cc)</string>
+    <string name="sieve_fineness_modulus">Fineness Modulus (FM)</string>
+    <string name="sieve_material_loss">Material Loss</string>
+    <string name="sieve_ai_commentary">AI Engineering Commentary</string>
+    <string name="sieve_ai_recommendation">Recommended Use</string>
+    <string name="info_sieve_automatic">Results are calculated automatically. Enter Atterberg limits for full classification.</string>
+    <string name="sieve_header_name">Sieve</string>
+    <string name="sieve_header_retained">Cumulative Ret. (g)</string>
+    <string name="sieve_header_cum_retained">Cum. Ret. %%</string>
+    <string name="sieve_header_passing">Passing %%</string>
+    <string name="spec_compare_title">Compare with Spec:</string>
+    <string name="spec_select">Select Specification</string>
+    <string name="spec_none">None</string>
+    <string name="spec_saudi_base_a">Saudi MOT - Base Course (A)</string>
+    <string name="spec_saudi_subbase">Saudi MOT - Subbase</string>
+    <string name="spec_astm_c33_fine">ASTM C33 - Fine Aggregate</string>
+    <string name="spec_astm_c33_57">ASTM C33 - Coarse Agg. #57</string>
+    <string name="spec_astm_c33_67">ASTM C33 - Coarse Agg. #67</string>
+    <string name="spec_superpave_19">Superpave (19.0mm NMAS)</string>
+    <string name="frost_susceptibility">Frost Susceptibility</string>
+    <string name="est_permeability">Est. Permeability (k)</string>
+    <string name="sample_type_label">Sample Type</string>
+    <string name="sample_type_soil">Soil</string>
+    <string name="sample_type_aggregate">Aggregate</string>
+    <string name="spec_custom">Define New Custom Spec...</string>
+    <string name="custom_spec_panel_title">Custom Specification Editor</string>
+    <string name="spec_name_label">Specification Name</string>
+    <string name="save_spec">Save Spec</string>
+    <string name="min_passing">Min Passing %%</string>
+    <string name="max_passing">Max Passing %%</string>
+    <string name="prediction_panel_title">AI Engineering Predictions</string>
+    <string name="predicted_omc">Predicted OMC</string>
+    <string name="predicted_mdd">Predicted MDD</string>
+    <string name="predicted_cbr">Predicted CBR</string>
+
+    <!-- ViewModel Messages -->
+    <string name="error_invalid_numbers">Please enter valid numbers.</string>
+    <string name="error_at_least_two_points">At least two data points are required.</string>
+    <string name="error_insufficient_range">Cannot compute. Penetration range is insufficient.</string>
+    <string name="error_fill_info_and_compute">Please fill sample info and compute results first.</string>
+    <string name="success_report_saved">✅ Report saved successfully to the reports list.</string>
+    <string name="example_data_loaded">Example data loaded. Press \'Compute\'.</string>
+    <string name="error_loading_report">Error: Could not load report.</string>
+    <string name="error_spec_name_empty">Specification name cannot be empty.</string>
+    <string name="error_spec_limits_empty">Please define at least one limit for the specification.</string>
+    <string name="success_spec_saved">Custom specification saved successfully!</string>
+
+    <!-- Reports Hub -->
+    <string name="reports_hub_title">Reports Data Hub</string>
+    <string name="atterberg_reports">Atterberg Limits Reports</string>
+    <string name="cbr_reports">CBR Test Reports</string>
+    <string name="sieve_reports">Sieve Analysis Reports</string>
+    <string name="proctor_reports">Proctor Reports</string>
+    <string name="report_card_bh">BH: %1$s / Sample: %2$s</string>
+    <string name="report_card_date">Date: %1$s</string>
+    <string name="report_card_class">Class</string>
+    <string name="report_card_ll">LL</string>
+    <string name="report_card_pi">PI</string>
+    <string name="report_card_final_cbr">Final CBR</string>
+    <string name="report_card_quality">Quality</string>
+
+    <!-- Soil Logic & AI Analysis -->
+    <string name="soil_cl">Lean Clay</string>
+    <string name="desc_cl">Low to medium plasticity clay</string>
+    <string name="soil_ml">Silt</string>
+    <string name="desc_ml">Low plasticity silt</string>
+    <string name="soil_cl_ml">Silty Clay</string>
+    <string name="desc_cl_ml">Mixture of silt and clay</string>
+    <string name="soil_ch">Fat Clay</string>
+    <string name="desc_ch">High plasticity clay</string>
+    <string name="soil_mh">Elastic Silt</string>
+    <string name="desc_mh">High plasticity silt</string>
+
+    <string name="rec_general_cat">General</string>
+    <string name="rec_general_desc">Follow standard procedures.</string>
+
+    <string name="quality_improvement_rec">Increase points for higher reliability.</string>
+
+    <string name="cbr_calc_success">Calculation successful.</string>
+    <string name="cbr_calc_warning_5mm">Warning: CBR at 5.0mm is higher. Re-test is recommended.</string>
+
+    <string name="cbr_rating_excellent">Excellent</string>
+    <string name="cbr_rating_very_good">Very Good</string>
+    <string name="cbr_rating_good">Good</string>
+    <string name="cbr_rating_fair">Fair</string>
+    <string name="cbr_rating_poor">Poor</string>
+    <string name="cbr_rating_very_poor">Very Poor</string>
+
+    <string name="cbr_interp_corrected">Curve was corrected, which can indicate initial seating issues or a granular, irregular surface.</string>
+    <string name="cbr_interp_stopped_early">Test stopped early. A standard test typically continues to at least 7.5mm penetration.</string>
+    <string name="cbr_interp_normal">The curve shows a typical shape for a well-compacted material with no significant anomalies.</string>
+
+    <string name="cbr_rec_excellent">Excellent material for use as a base or sub-base course in pavement structures.</string>
+    <string name="cbr_rec_good">Suitable for use as a sub-base or high-quality subgrade. Good overall performance expected.</string>
+    <string name="cbr_rec_fair">Acceptable for use as a general subgrade, but may require stabilization for heavy traffic loads.</string>
+    <string name="cbr_rec_poor">Low-strength subgrade. Not suitable for direct foundation. Consider soil improvement or replacement.</string>
+    <string name="cbr_rec_very_poor">Very weak soil. Significant engineering intervention (e.g., replacement, deep stabilization) is required.</string>
+
+    <!-- Example Data Descriptions -->
+    <string name="example_desc_cl">Example: Lean Clay (CL)</string>
+    <string name="example_desc_ch">Example: Fat Clay (CH)</string>
+    <string name="example_desc_ml">Example: Silt (ML)</string>
+    <string name="example_desc_cbr_good_subbase">Example: Good quality sub-base material</string>
+    <string name="example_desc_cbr_soft_clay">Example: Soft clay subgrade</string>
+    <string name="example_desc_cbr_correction">Example: Material requiring curve correction</string>
+    <string name="example_desc_proctor_sc">Example: Clayey Sand (SC)</string>
+    <string name="example_desc_proctor_cl">Example: Lean Clay (CL)</string>
+    <string name="example_desc_proctor_gw">Example: Well-Graded Gravel (GW)</string>
+
+
+    <!-- USCS Descriptions -->
+    <string name="uscs_desc_gw">Well-graded gravel</string>
+    <string name="uscs_desc_gp">Poorly graded gravel</string>
+    <string name="uscs_desc_gm">Silty gravel</string>
+    <string name="uscs_desc_gc">Clayey gravel</string>
+    <string name="uscs_desc_sw">Well-graded sand</string>
+    <string name="uscs_desc_sp">Poorly graded sand</string>
+    <string name="uscs_desc_sm">Silty sand</string>
+    <string name="uscs_desc_sc">Clayey sand</string>
+    <string name="uscs_desc_dual">Dual symbol coarse-grained soil</string>
+
+    <!-- Frost Susceptibility -->
+    <string name="frost_neg">Negligible</string>
+    <string name="frost_low">Low</string>
+    <string name="frost_medium">Medium</string>
+    <string name="frost_high">High</string>
+    <string name="frost_v_high">Very High</string>
+
+    <!-- Dynamic AI Commentary -->
+    <string name="commentary_well_graded">The material is well-graded, indicating a good distribution of particle sizes which typically leads to better compaction and stability.</string>
+    <string name="commentary_poorly_graded">The material is poorly-graded (uniform or gap-graded). This may lead to higher permeability and lower stability compared to well-graded soils.</string>
+    <string name="commentary_high_plasticity">The soil exhibits high plasticity. This indicates a high clay content, which may lead to significant volume changes (swell/shrinkage) with variations in moisture content.</string>
+    <string name="commentary_low_plasticity">The soil exhibits low plasticity, suggesting it is more stable with changes in water content compared to highly plastic clays.</string>
+    <string name="commentary_sandy_fines">The sample is a sandy soil with a significant amount of fines (silt/clay). The behavior will be influenced by both the sand skeleton and the plasticity of the fines.</string>
+
+    <!-- Info Tooltips -->
+    <string name="info_d10_title">D10 (Effective Size)</string>
+    <string name="info_d10_content">The particle diameter at which 10% of the soil is finer. It\'s a key indicator of soil permeability and susceptibility to erosion.</string>
+    <string name="info_d30_title">D30</string>
+    <string name="info_d30_content">The particle diameter at which 30% of the soil is finer. It is primarily used in calculating the Coefficient of Curvature (Cc).</string>
+    <string name="info_d60_title">D60</string>
+    <string name="info_d60_content">The particle diameter at which 60% of the soil is finer. It is used along with D10 to determine the Coefficient of Uniformity (Cu).</string>
+    <string name="info_cu_title">Cu (Coefficient of Uniformity)</string>
+    <string name="info_cu_content">Calculated as D60 / D10. A value > 4 (for gravels) or > 6 (for sands) indicates a well-graded soil with a wide range of particle sizes.</string>
+    <string name="info_cc_title">Cc (Coefficient of Curvature)</string>
+    <string name="info_cc_content">Calculated as (D30)² / (D10 * D60). A value between 1 and 3 indicates a smooth, continuous gradation, which is a condition for well-graded soils.</string>
+    <string name="info_fm_title">FM (Fineness Modulus)</string>
+    <string name="info_fm_content">An index of the fineness of an aggregate. It\'s calculated by summing the cumulative percentages retained on a specified series of sieves and dividing by 100. Primarily used for fine aggregate in concrete mix design.</string>
+    <string name="info_prediction_title">AI Prediction</string>
+    <string name="info_prediction_content">This value is an estimate generated by GeoMind 3025 using Multiple Linear Regression (MLR) models. These models are based on scientifically published empirical correlations from geotechnical literature, linking index properties (gradation, Atterberg limits) to engineering behavior. This provides a reliable preliminary assessment but does not replace laboratory testing for final design.</string>
+    <string name="info_final_cbr_title">Final CBR Value</string>
+    <string name="info_final_cbr_content">The California Bearing Ratio (CBR) is a penetration test for evaluation of the mechanical strength of subgrades and base courses. The final value is typically the CBR value at 2.5 mm penetration, unless the value at 5.0 mm is higher, in which case the test should be re-run.</string>
+    <string name="info_corrected_title">Curve Correction</string>
+    <string name="info_corrected_content">Correction is applied when the initial portion of the curve is concave, indicating surface irregularities or seating issues. A tangent is drawn from the steepest part of the curve, and its intersection with the x-axis becomes the new zero point for penetration readings.</string>
+    <string name="info_mr_title">Resilient Modulus (Mr)</string>
+    <string name="info_mr_content">An estimation of the material\'s stiffness, crucial for flexible pavement design. It is predicted from CBR using empirical correlations (e.g., Mr (psi) = 1500 * CBR). This provides a preliminary design value.</string>
+    <string name="info_su_title">Undrained Shear Strength (Su)</string>
+    <string name="info_su_content">For cohesive soils, CBR can provide an estimate of the undrained shear strength, which represents the soil\'s resistance to shear failure under constant volume. A common correlation is Su (kPa) ≈ 20 * CBR.</string>
+    <string name="info_k_title">Modulus of Subgrade Reaction (k)</string>
+    <string name="info_k_content">A key parameter for rigid pavement design, representing the support provided by the subgrade. It relates the pressure on the subgrade to its deflection. It is often estimated from CBR for preliminary design purposes.</string>
+    <string name="info_gs_title">Specific Gravity (Gs) Importance</string>
+    <string name="info_gs_content">This value is critical for quality control. It\'s used to calculate and draw the Zero Air Voids (ZAV) curve on the chart. The ZAV curve represents the theoretical maximum density. The actual compaction curve must always lie below this line; if it crosses it, it indicates an error in the test data or the assumed Gs value.</string>
+    <string name="info_swell_title">Swell Potential</string>
+    <string name="info_swell_content">An estimate of the soil\'s tendency to increase in volume (swell) when exposed to moisture. It is primarily influenced by the type and amount of clay minerals (plasticity) and the initial dry density. High swell potential can cause significant damage to structures.</string>
+
+
+</resources>
+

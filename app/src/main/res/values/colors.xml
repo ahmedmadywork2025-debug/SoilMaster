@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background and general colors -->
+    <color name="secondaryText">#757575</color>
+
+    <!-- Primary Colors -->
+    <color name="secondaryColor">#03DAC6</color>
+
+        <color name="backgroundColor">#FFFFFF</color>
+
+        <color name="buttonBorder">#1565C0</color>
+
+        <color name="buttonBorderSecondary">#BDBDBD</color>
+
+
+
+    <!-- Button text color -->
+    <color name="buttonTextColor">#FFFFFF</color>
+    <!-- الألوان الافتراضية -->
+    <color name="light_gray">#B0B0B0</color>
+
+
+    <!-- ألوان مخصصة للسوشيال -->
+    <color name="facebook_blue">#1877F2</color>
+    <color name="linkedin_blue">#0A66C2</color>
+    <!-- Additional standard colors -->
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="lightGray">#D3D3D3</color>
+    <color name="green">#008000</color>
+    <color name="blue">#0000FF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF5252</color>
+    <color name="orange">#FF9800</color>
+    <color name="dark_gray">#212121</color>
+
+        <!-- الألوان الرئيسية -->
+
+        <!-- خلفية عامة -->
+
+        <!-- ألوان الأزرار -->
+        <color name="primaryColor">#8D6E63</color>          <!-- بني متوسط -->
+        <color name="primaryVariant">#5D4037</color>       <!-- بني داكن -->
+        <color name="primaryText">#FFFFFF</color>          <!-- أبيض للنصوص -->
+
+        <color name="background">#D7CCC8</color>           <!-- رملي فاتح -->
+
+        <color name="buttonBackground">#A1887F</color>     <!-- بني فاتح -->
+        <color name="buttonText">#FFFFFF</color>
+        <color name="buttonBackgroundSecondary">#607D8B</color> <!-- أزرق رمادي للأزرار الثانوية -->
+
+    <color name="cardBackground">#FFFFFF</color> <!-- هنا -->
+    <color name="errorColor">#D32F2F</color> <!-- هنا -->
+    <color name="cardTextColor">#212121</color>
+
+
+
+
+
+</resources>
