@@ -50,6 +50,9 @@ import kotlin.math.abs
 import kotlin.math.log10
 import kotlin.math.pow
 
+import com.example.soillab.ui.components.ActionButtons
+import com.example.soillab.ui.components.TestInfoSection
+
 // --- UI State ---
 data class SieveUiState(
     val testInfo: TestInfo = TestInfo(),
@@ -110,13 +113,16 @@ class SieveAnalysisViewModel(private val repository: IReportRepository) : ViewMo
     }
 
     fun onSieveWeightChange(opening: Double, retainedWeight: String) {
+        val isValidInput = retainedWeight.isEmpty() || retainedWeight.toDoubleOrNull() != null
         _uiState.update { state ->
             val updatedSieves = state.sieves.map {
-                if (it.opening == opening) it.copy(retainedWeight = retainedWeight) else it
+                if (it.opening == opening) it.copy(retainedWeight = if (isValidInput) retainedWeight else it.retainedWeight) else it
             }
             state.copy(sieves = updatedSieves)
         }
-        performCalculations()
+        if (isValidInput) {
+            performCalculations()
+        }
     }
 
     fun onTestInfoChange(newInfo: TestInfo) {
@@ -124,8 +130,18 @@ class SieveAnalysisViewModel(private val repository: IReportRepository) : ViewMo
     }
 
     fun onParamsChange(newParams: ClassificationParameters) {
-        _uiState.update { it.copy(parameters = newParams) }
-        performCalculations()
+        val llValid = newParams.liquidLimit.isEmpty() || newParams.liquidLimit.toDoubleOrNull() != null
+        val plValid = newParams.plasticLimit.isEmpty() || newParams.plasticLimit.toDoubleOrNull() != null
+        val weightValid = newParams.initialWeight.isEmpty() || newParams.initialWeight.toDoubleOrNull() != null
+
+        if (llValid && plValid && weightValid) {
+            _uiState.update { it.copy(parameters = newParams) }
+            performCalculations()
+        } else {
+            // Optionally, handle the invalid input case, e.g., by only updating the text field without triggering recalculation.
+            // For simplicity here, we can just update the state without triggering the calculation if the input is partial/invalid.
+            _uiState.update { it.copy(parameters = newParams) }
+        }
     }
 
     fun onSpecificationSelected(spec: Specification?) {
@@ -305,76 +321,70 @@ class SieveAnalysisViewModel(private val repository: IReportRepository) : ViewMo
     }
 }
 
-// --- Main Composable ---
 @Composable
-fun SieveAnalysisScreen(
+fun SieveAnalysisScreenImproved(
     viewModel: SieveAnalysisViewModel,
     reportIdToLoad: String?,
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val snackbarHostState = remember { SnackbarHostState() }
-    val userMessage by viewModel.userMessage.collectAsState()
-    val highlightedValue = uiState.highlightedValue
+
+    LaunchedEffect(reportIdToLoad) {
+        viewModel.loadReportForEditing(reportIdToLoad)
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        SieveAnalysisSetupSection(viewModel, uiState)
+        SieveAnalysisDataAndResultsSection(viewModel, uiState)
+    }
+}
+
+@Composable
+fun SieveAnalysisSetupSection(
+    viewModel: SieveAnalysisViewModel,
+    uiState: SieveUiState
+) {
+    TestInfoSection(uiState.testInfo, onInfoChange = viewModel::onTestInfoChange)
+    ParametersSection(
+        params = uiState.parameters,
+        onParamsChange = viewModel::onParamsChange,
+        sampleType = uiState.selectedSampleType,
+        onSampleTypeChange = viewModel::onSampleTypeChange
+    )
+}
+
+@Composable
+fun SieveAnalysisDataAndResultsSection(
+    viewModel: SieveAnalysisViewModel,
+    uiState: SieveUiState
+) {
     val context = LocalContext.current
-
-    LaunchedEffect(reportIdToLoad) { viewModel.loadReportForEditing(reportIdToLoad) }
-    LaunchedEffect(userMessage) {
-        userMessage?.let {
-            snackbarHostState.showSnackbar(it)
-            viewModel.clearUserMessage()
-        }
-    }
-    LaunchedEffect(highlightedValue) {
-        highlightedValue?.let {
-            snackbarHostState.showSnackbar(it)
-            viewModel.clearHighlightedValue()
-        }
+    SieveDataTable(sieves = uiState.sieves, onSieveWeightChange = viewModel::onSieveWeightChange)
+    AnimatedVisibility(visible = uiState.isCustomSpecEditing) {
+        CustomSpecEditorPanel(
+            sieves = uiState.customSpecSieves,
+            limits = uiState.customSpecLimits,
+            onLimitChange = viewModel::onCustomSpecLimitChange,
+            specName = uiState.customSpecName,
+            onNameChange = viewModel::onCustomSpecNameChange,
+            onSave = { viewModel.saveCustomSpecification(context) }
+        )
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Spacer(Modifier.height(8.dp))
-            TestInfoSection(uiState.testInfo, onInfoChange = viewModel::onTestInfoChange)
-            ParametersSection(
-                params = uiState.parameters,
-                onParamsChange = viewModel::onParamsChange,
-                sampleType = uiState.selectedSampleType,
-                onSampleTypeChange = viewModel::onSampleTypeChange
-            )
-            SieveDataTable(sieves = uiState.sieves, onSieveWeightChange = viewModel::onSieveWeightChange)
-
-            AnimatedVisibility(visible = uiState.isCustomSpecEditing) {
-                CustomSpecEditorPanel(
-                    sieves = uiState.customSpecSieves,
-                    limits = uiState.customSpecLimits,
-                    onLimitChange = viewModel::onCustomSpecLimitChange,
-                    specName = uiState.customSpecName,
-                    onNameChange = viewModel::onCustomSpecNameChange,
-                    onSave = { viewModel.saveCustomSpecification(context) }
-                )
-            }
-
-
-            AnimatedVisibility(visible = uiState.result != null) {
-                uiState.result?.let { ResultDashboard(it, uiState, viewModel) }
-            }
-
-            Spacer(Modifier.height(32.dp))
-        }
-        AnimatedVisibility(visible = uiState.isLoading, enter = fadeIn(), exit = fadeOut(), modifier = Modifier.align(Alignment.Center)) {
-            CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+    AnimatedVisibility(visible = uiState.result != null) {
+        if (uiState.result != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            ResultDashboard(uiState.result, uiState, viewModel)
         }
     }
 }
 
-// --- UI Sections ---
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ParametersSection(
@@ -1044,4 +1054,3 @@ fun setupGradationChart(chart: LineChart, colorScheme: ColorScheme) {
         }
     }
 }
-

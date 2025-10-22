@@ -1,4 +1,4 @@
-package com.example.soillab.cbrtest
+package com.example.soillab.cbr
 
 import android.content.Context
 import androidx.compose.animation.*
@@ -43,6 +43,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.*
+
+// --- Main CBR Screen ---
+import com.example.soillab.ui.components.ActionButtons
+import com.example.soillab.ui.components.TestInfoSection
 
 // --- UI State ---
 data class CBRUiState(
@@ -128,10 +132,19 @@ class CBRViewModel(private val repository: IReportRepository) : ViewModel() {
         val dialReading = _uiState.value.dialReadingInput.toDoubleOrNull()
         val factor = _uiState.value.parameters.provingRingFactor.toDoubleOrNull()
 
-        if (pen == null || dialReading == null || factor == null || factor == 0.0) {
-            _userMessage.value = "Please enter valid numbers for penetration, dial reading, and a non-zero factor."
+        if (pen == null) {
+            _userMessage.value = "Invalid input for Penetration."
             return
         }
+        if (dialReading == null) {
+            _userMessage.value = "Invalid input for Dial Reading."
+            return
+        }
+        if (factor == null || factor == 0.0) {
+            _userMessage.value = "Invalid or zero value for Proving Ring Factor in Setup."
+            return
+        }
+
         val load = dialReading * factor
         val newPoint = CBRDataPoint(penetration = pen, load = load)
         _uiState.update { state ->
@@ -191,9 +204,8 @@ class CBRViewModel(private val repository: IReportRepository) : ViewModel() {
     }
 }
 
-// --- Main CBR Screen ---
 @Composable
-fun CBRTestScreen(
+fun CBRTestScreenImproved(
     viewModel: CBRViewModel,
     reportIdToLoad: String?,
     onNavigateBack: () -> Unit
@@ -201,9 +213,7 @@ fun CBRTestScreen(
     val uiState by viewModel.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val userMessage by viewModel.userMessage.collectAsState()
-    val highlightedValue = uiState.highlightedValue // Corrected state access
-
-    val context = LocalContext.current
+    val highlightedValue = uiState.highlightedValue
 
     LaunchedEffect(reportIdToLoad) { viewModel.loadReportForEditing(reportIdToLoad) }
     LaunchedEffect(userMessage) {
@@ -212,13 +222,12 @@ fun CBRTestScreen(
             viewModel.clearUserMessage()
         }
     }
-    LaunchedEffect(highlightedValue) { // Corrected state access
+    LaunchedEffect(highlightedValue) {
         highlightedValue?.let {
             snackbarHostState.showSnackbar(it)
         }
     }
 
-    // This screen does not need a Scaffold because it's hosted within the main SoilLabApp Scaffold
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -227,38 +236,8 @@ fun CBRTestScreen(
                 .padding(horizontal = 16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Spacer(Modifier.height(8.dp))
-            TestInfoSection(uiState.parameters.testInfo) { newInfo ->
-                viewModel.onParamsChange(uiState.parameters.copy(testInfo = newInfo))
-            }
-            InputAndParametersSection(viewModel, uiState)
-            DataPointsList(uiState.points, viewModel::removePoint)
-            CbrChart(
-                points = uiState.points,
-                correctedPoints = uiState.correctedPoints,
-                onValueSelected = viewModel::onChartValueSelected,
-                modifier = Modifier.fillMaxWidth().height(300.dp)
-            )
-            Spacer(Modifier.height(16.dp))
-
-            ActionButtons(onCompute = viewModel::computeCBR, onLoadExample = { viewModel.loadExampleData(context) })
-
-            AnimatedVisibility(visible = uiState.result != null) {
-                val result = uiState.result
-                if (result != null) {
-                    Column {
-                        ResultSection(result, uiState.requiredCbr, viewModel::onRequiredCbrChange)
-                        result.insights?.let { EngineeringPropertiesPanel(it, result) }
-                    }
-                }
-            }
-
-
-            AnimatedVisibility(visible = uiState.result == null && !uiState.isLoading) {
-                InfoPanel(stringResource(R.string.info_awaiting_data_cbr))
-            }
-
-            Spacer(Modifier.height(32.dp))
+            CBRSetupSection(viewModel, uiState)
+            CBRDataAndResultsSection(viewModel, uiState)
         }
         AnimatedVisibility(
             visible = uiState.isLoading,
@@ -267,6 +246,49 @@ fun CBRTestScreen(
             modifier = Modifier.align(Alignment.Center)
         ) {
             CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+        }
+    }
+}
+
+@Composable
+fun CBRSetupSection(
+    viewModel: CBRViewModel,
+    uiState: CBRUiState
+) {
+    TestInfoSection(uiState.parameters.testInfo) { newInfo ->
+        viewModel.onParamsChange(uiState.parameters.copy(testInfo = newInfo))
+    }
+    InputAndParametersSection(viewModel, uiState)
+}
+
+@Composable
+fun CBRDataAndResultsSection(
+    viewModel: CBRViewModel,
+    uiState: CBRUiState
+) {
+    val context = LocalContext.current
+    DataPointsList(uiState.points, viewModel::removePoint)
+    CbrChart(
+        points = uiState.points,
+        correctedPoints = uiState.correctedPoints,
+        onValueSelected = viewModel::onChartValueSelected,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    )
+    Spacer(Modifier.height(16.dp))
+    ActionButtons(onCompute = viewModel::computeCBR, onLoadExample = { viewModel.loadExampleData(context) })
+
+    AnimatedVisibility(visible = uiState.result != null) {
+        val result = uiState.result
+        if (result != null) {
+            Column {
+                Spacer(modifier = Modifier.height(16.dp))
+                ResultSection(result, uiState.requiredCbr, viewModel::onRequiredCbrChange)
+                if (result.insights != null) {
+                    EngineeringPropertiesPanel(result.insights!!, result)
+                }
+            }
         }
     }
 }
@@ -553,4 +575,3 @@ fun CbrChart(
         modifier = modifier
     )
 }
-

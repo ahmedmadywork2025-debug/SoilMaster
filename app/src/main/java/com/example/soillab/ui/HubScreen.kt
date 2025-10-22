@@ -1,6 +1,9 @@
 package com.example.soillab.ui
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -10,10 +13,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.soillab.AppScreen
 import com.example.soillab.R
 
@@ -52,31 +58,57 @@ fun HubScreen(onNavigate: (AppScreen, String?) -> Unit) {
         QuickAccessItem("Sieve Analysis - Site Beta", "Status: Warning", "Draft", false, "2", AppScreen.SIEVE_ANALYSIS)
     )
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Quick Access Section
-        SectionTitle(title = "Quick Access")
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            quickAccessItems.forEach { item ->
-                QuickAccessCard(item = item, onNavigate = onNavigate)
+        item {
+            Header()
+        }
+
+        item {
+            SectionTitle(title = "Quick Access")
+            Spacer(modifier = Modifier.height(8.dp))
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                quickAccessItems.forEach { item ->
+                    QuickAccessCard(item = item, onNavigate = onNavigate)
+                }
             }
         }
 
-        // Tests & Procedures Section
-        SectionTitle(title = "Tests & Procedures")
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(HubRepository.getHubActions()) { action ->
-                TestProcedureCard(action = action, onNavigate = onNavigate)
+        item {
+            SectionTitle(title = "Tests & Procedures")
+            Spacer(modifier = Modifier.height(8.dp))
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(3),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.height(300.dp) // Adjust height as needed
+            ) {
+                items(HubRepository.getHubActions()) { action ->
+                    TestProcedureCard(action = action, onNavigate = onNavigate)
+                }
             }
         }
+    }
+}
+
+@Composable
+fun Header() {
+    Column(modifier = Modifier.padding(bottom = 16.dp)) {
+        Text(
+            text = "Welcome back,",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Text(
+            text = "GeoMind Dashboard",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
     }
 }
 
@@ -84,9 +116,10 @@ fun HubScreen(onNavigate: (AppScreen, String?) -> Unit) {
 fun SectionTitle(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.titleMedium,
-        fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.onBackground
+        style = MaterialTheme.typography.titleLarge,
+        fontWeight = FontWeight.SemiBold,
+        color = MaterialTheme.colorScheme.onBackground,
+        modifier = Modifier.padding(top = 8.dp)
     )
 }
 
@@ -95,7 +128,9 @@ fun SectionTitle(title: String) {
 fun QuickAccessCard(item: QuickAccessItem, onNavigate: (AppScreen, String?) -> Unit) {
     Card(
         onClick = { onNavigate(item.screen, item.reportId) },
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
     ) {
         Row(
             modifier = Modifier
@@ -109,12 +144,12 @@ fun QuickAccessCard(item: QuickAccessItem, onNavigate: (AppScreen, String?) -> U
                 false -> Icons.Default.Warning to MaterialTheme.colorScheme.error
                 null -> Icons.Default.Info to MaterialTheme.colorScheme.onSurfaceVariant
             }
-            Icon(imageVector = icon, contentDescription = "Status", tint = color)
+            Icon(imageVector = icon, contentDescription = "Status", tint = color, modifier = Modifier.size(28.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text(item.title, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold)
+                Text(item.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(item.subtitle, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Text(item.status, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(item.status, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.SemiBold)
         }
     }
 }
@@ -123,18 +158,29 @@ fun QuickAccessCard(item: QuickAccessItem, onNavigate: (AppScreen, String?) -> U
 @Composable
 fun TestProcedureCard(action: HubAction, onNavigate: (AppScreen, String?) -> Unit) {
     val isEnabled = action.screen != null
+    val containerColor = if (isEnabled) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+
     Card(
         onClick = { if (isEnabled) onNavigate(action.screen!!, null) },
         enabled = isEnabled,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-        )
+            containerColor = containerColor,
+            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
+                .background(
+                    if (isEnabled) Brush.verticalGradient(
+                        colors = listOf(
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                            containerColor
+                        )
+                    ) else Brush.verticalGradient(colors = listOf(containerColor, containerColor))
+                )
                 .padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -142,18 +188,17 @@ fun TestProcedureCard(action: HubAction, onNavigate: (AppScreen, String?) -> Uni
             Icon(
                 imageVector = action.icon,
                 contentDescription = stringResource(id = action.titleResId),
-                modifier = Modifier.size(32.dp),
+                modifier = Modifier.size(40.dp),
                 tint = if (isEnabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = stringResource(id = action.titleResId),
                 style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = if (isEnabled) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                fontWeight = FontWeight.Bold,
+                color = if (isEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                textAlign = TextAlign.Center
             )
         }
     }
 }
-

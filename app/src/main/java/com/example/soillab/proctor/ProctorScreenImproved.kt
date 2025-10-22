@@ -96,8 +96,20 @@ class ProctorViewModel(private val repository: IReportRepository) : ViewModel() 
             val moldWeight = state.parameters.moldWeight.toDoubleOrNull()
             val moldVolume = state.parameters.moldVolume.toDoubleOrNull()
 
-            if (moisture == null || wetSoilAndMoldWeight == null || moldWeight == null || moldVolume == null || moldVolume == 0.0) {
-                _userMessage.emit("Please fill all parameters and point data correctly.")
+            if (moisture == null) {
+                _userMessage.emit("Invalid input for Moisture Content.")
+                return@launch
+            }
+            if (wetSoilAndMoldWeight == null) {
+                _userMessage.emit("Invalid input for Wet Soil + Mold Weight.")
+                return@launch
+            }
+            if (moldWeight == null) {
+                _userMessage.emit("Invalid input for Mold Weight in Setup.")
+                return@launch
+            }
+            if (moldVolume == null || moldVolume == 0.0) {
+                _userMessage.emit("Invalid or zero value for Mold Volume in Setup.")
                 return@launch
             }
 
@@ -234,14 +246,16 @@ class ProctorViewModel(private val repository: IReportRepository) : ViewModel() 
 }
 
 
+import com.example.soillab.ui.components.ActionButtons
+import com.example.soillab.ui.components.TestInfoSection
+
 @Composable
-fun ProctorTestScreen(
+fun ProctorScreenImproved(
     viewModel: ProctorViewModel,
     reportIdToLoad: String?,
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val context = LocalContext.current
 
     LaunchedEffect(reportIdToLoad) {
         viewModel.loadReportForEditing(reportIdToLoad)
@@ -254,38 +268,55 @@ fun ProctorTestScreen(
             .padding(horizontal = 16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
-        TestSetupPanel(
-            parameters = uiState.parameters,
-            onParamsChange = viewModel::onParamsChange
-        )
-        DataPointsInputPanel(
-            uiState = uiState,
-            onMoistureChange = viewModel::onMoistureInputChange,
-            onWetWeightChange = viewModel::onWetWeightInputChange,
-            onAddPoint = viewModel::addPoint
-        )
-        DataPointsList(points = uiState.points, onRemove = viewModel::removePoint)
-        ActionButtons(
-            onCompute = { viewModel.calculateProctorCurve() },
-            onLoadExample = { viewModel.loadExampleData(context) }
-        )
-
-        AnimatedVisibility(visible = uiState.result != null) {
-            uiState.result?.let { result ->
-                ResultDashboard(
-                    result = result,
-                    fieldMoistureContent = uiState.fieldMoistureContent,
-                    onFieldMoistureChange = viewModel::onFieldMoistureChange,
-                    requiredCompaction = uiState.requiredCompaction,
-                    onRequiredCompactionChange = viewModel::onRequiredCompactionChange,
-                    testParameters = uiState.parameters
-                )
-            }
-        }
+        ProctorSetupSection(uiState, viewModel)
+        ProctorDataAndResultsSection(uiState, viewModel)
     }
 }
 
+@Composable
+fun ProctorSetupSection(
+    uiState: ProctorUiState,
+    viewModel: ProctorViewModel
+) {
+    TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
+    TestSetupPanel(
+        parameters = uiState.parameters,
+        onParamsChange = viewModel::onParamsChange
+    )
+}
+
+@Composable
+fun ProctorDataAndResultsSection(
+    uiState: ProctorUiState,
+    viewModel: ProctorViewModel
+) {
+    val context = LocalContext.current
+    DataPointsInputPanel(
+        uiState = uiState,
+        onMoistureChange = viewModel::onMoistureInputChange,
+        onWetWeightChange = viewModel::onWetWeightInputChange,
+        onAddPoint = viewModel::addPoint
+    )
+    DataPointsList(points = uiState.points, onRemove = viewModel::removePoint)
+    ActionButtons(
+        onCompute = { viewModel.calculateProctorCurve() },
+        onLoadExample = { viewModel.loadExampleData(context) }
+    )
+
+    AnimatedVisibility(visible = uiState.result != null) {
+        if (uiState.result != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            ResultDashboard(
+                result = uiState.result,
+                fieldMoistureContent = uiState.fieldMoistureContent,
+                onFieldMoistureChange = viewModel::onFieldMoistureChange,
+                requiredCompaction = uiState.requiredCompaction,
+                onRequiredCompactionChange = viewModel::onRequiredCompactionChange,
+                testParameters = uiState.parameters
+            )
+        }
+    }
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TestSetupPanel(
@@ -600,4 +631,3 @@ fun setupProctorChart(chart: LineChart, colorScheme: ColorScheme) {
         granularity = 1f
     }
 }
-

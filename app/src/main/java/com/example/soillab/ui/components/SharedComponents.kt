@@ -44,18 +44,27 @@ private fun String.toEnglishNumerals(): String {
 
 @Composable
 fun DataPanel(title: String, content: @Composable ColumnScope.() -> Unit) {
-    Column(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .border(1.dp, Brush.verticalGradient(listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), Color.Transparent)), RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f), RoundedCornerShape(12.dp))
-            .padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(vertical = 8.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        shape = RoundedCornerShape(12.dp)
     ) {
-        Text(text = "//$title", color = MaterialTheme.colorScheme.primary, fontSize = 16.sp, fontWeight = FontWeight.Medium, letterSpacing = 2.sp)
-        Divider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
-        content()
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Divider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
+            content()
+        }
     }
 }
 
@@ -77,10 +86,14 @@ fun InfoPanel(text: String) {
 }
 
 @Composable
-fun NeuralInput(value: String, onValueChange: (String) -> Unit, label: String, modifier: Modifier = Modifier, keyboardType: KeyboardType = KeyboardType.Decimal, isError: Boolean = false) {
-    val interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }
-    val isFocused by interactionSource.collectIsFocusedAsState()
-
+fun NeuralInput(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    keyboardType: KeyboardType = KeyboardType.Decimal,
+    isError: Boolean = false
+) {
     val onFilteredValueChange: (String) -> Unit = { newText ->
         val englishNumeralsText = newText.toEnglishNumerals()
         if (keyboardType == KeyboardType.Decimal) {
@@ -93,34 +106,42 @@ fun NeuralInput(value: String, onValueChange: (String) -> Unit, label: String, m
         }
     }
 
-    Column(modifier = modifier) {
-        Text(label, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
-        BasicTextField(
-            value = value,
-            onValueChange = onFilteredValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            textStyle = TextStyle(color = MaterialTheme.colorScheme.onBackground, fontSize = 16.sp),
-            keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = ImeAction.Next),
-            singleLine = true,
-            cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-            interactionSource = interactionSource
+    OutlinedTextField(
+        value = value,
+        onValueChange = onFilteredValueChange,
+        label = { Text(label) },
+        modifier = modifier.fillMaxWidth(),
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = ImeAction.Next),
+        singleLine = true,
+        isError = isError,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
         )
-        val lineColor = when { isError -> MaterialTheme.colorScheme.error; isFocused -> MaterialTheme.colorScheme.primary; else -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f) }
-        Divider(color = lineColor, thickness = if (isFocused || isError) 2.dp else 1.dp)
-    }
+    )
 }
 
 @Composable
-fun ResultDisplay(title: String, value: String, isPrimary: Boolean = false, valueColor: Color = if (isPrimary) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground) {
+fun ResultDisplay(
+    title: String,
+    value: String,
+    isPrimary: Boolean = false,
+    valueColor: Color = if (isPrimary) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(title, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Text(value, color = valueColor, fontWeight = FontWeight.Bold, fontSize = if (isPrimary) 20.sp else 16.sp)
+        Text(title, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(
+            value,
+            style = if (isPrimary) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.bodyLarge,
+            color = valueColor,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
 
@@ -152,24 +173,29 @@ fun ResultDisplayWithInfo(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(title, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (infoContentResId != null) {
-                IconButton(onClick = { showInfoDialog = true }, modifier = Modifier.size(20.dp)) {
+                IconButton(onClick = { showInfoDialog = true }, modifier = Modifier.size(24.dp)) {
                     Icon(
                         Icons.Default.HelpOutline,
                         contentDescription = stringResource(R.string.more_info),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                 }
             }
         }
-        Text(value, color = valueColor, fontWeight = FontWeight.Bold, fontSize = if (isPrimary) 20.sp else 16.sp)
+        Text(
+            value,
+            style = if (isPrimary) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.bodyLarge,
+            color = valueColor,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
 
@@ -187,13 +213,18 @@ fun ValidationIndicator(validation: ValidationResult?) {
 
 @Composable
 fun InsightCard(icon: ImageVector, title: String, content: String) {
-    Row(modifier = Modifier.padding(vertical = 6.dp), verticalAlignment = Alignment.Top) {
-        Icon(icon, contentDescription = title, tint = MaterialTheme.colorScheme.primary, modifier = Modifier
-            .padding(end = 12.dp)
-            .size(20.dp))
+    Row(modifier = Modifier.padding(vertical = 8.dp), verticalAlignment = Alignment.Top) {
+        Icon(
+            icon,
+            contentDescription = title,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .padding(end = 16.dp)
+                .size(24.dp)
+        )
         Column {
-            Text(title, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground, fontSize = 14.sp)
-            Text(content, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp)
+            Text(title, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onBackground)
+            Text(content, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -284,4 +315,3 @@ fun MoistureContentCalculatorDialog(onDismiss: () -> Unit, onCalculate: (String)
         }
     )
 }
-

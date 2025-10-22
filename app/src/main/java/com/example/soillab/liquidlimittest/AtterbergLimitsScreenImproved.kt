@@ -48,6 +48,9 @@ import java.util.*
 import kotlin.math.log10
 import kotlin.math.pow
 import kotlin.math.sqrt
+import com.example.soillab.ui.components.ActionButtons
+import com.example.soillab.ui.components.DataPanel
+import com.example.soillab.ui.components.TestInfoSection
 
 // --- كائن حالة الواجهة (UI State) ---
 data class AtterbergUiState(
@@ -134,8 +137,15 @@ class AtterbergCoreViewModel(private val repository: IReportRepository) : ViewMo
 
     fun onTestInfoChange(newInfo: TestInfo) { _uiState.update { it.copy(testInfo = newInfo) } }
     fun onLLSampleValueChange(id: Int, updatedSample: LiquidLimitSample) {
-        _uiState.update { state -> state.copy(llSamples = state.llSamples.map { if (it.id == id) updatedSample else it }) }
-        performAdvancedCalculations()
+        val blowsValid = updatedSample.blows.isEmpty() || updatedSample.blows.toFloatOrNull() != null
+        val wcValid = updatedSample.waterContent.isEmpty() || updatedSample.waterContent.toFloatOrNull() != null
+        if (blowsValid && wcValid) {
+            _uiState.update { state -> state.copy(llSamples = state.llSamples.map { if (it.id == id) updatedSample else it }) }
+            performAdvancedCalculations()
+        } else {
+            // Update the UI with the invalid input to show the user what they typed, but don't trigger recalculation.
+            _uiState.update { state -> state.copy(llSamples = state.llSamples.map { if (it.id == id) updatedSample else it }) }
+        }
     }
     fun addLLSample() { _uiState.update { state -> state.copy(llSamples = state.llSamples + LiquidLimitSample(id = (state.llSamples.maxOfOrNull { it.id } ?: 0) + 1)) } }
     fun removeLLSample(id: Int) {
@@ -145,8 +155,13 @@ class AtterbergCoreViewModel(private val repository: IReportRepository) : ViewMo
         }
     }
     fun onPLSampleValueChange(id: Int, updatedSample: PlasticLimitSample) {
-        _uiState.update { state -> state.copy(plSamples = state.plSamples.map { if (it.id == id) updatedSample else it }) }
-        performAdvancedCalculations()
+        val wcValid = updatedSample.waterContent.isEmpty() || updatedSample.waterContent.toFloatOrNull() != null
+        if (wcValid) {
+            _uiState.update { state -> state.copy(plSamples = state.plSamples.map { if (it.id == id) updatedSample else it }) }
+            performAdvancedCalculations()
+        } else {
+            _uiState.update { state -> state.copy(plSamples = state.plSamples.map { if (it.id == id) updatedSample else it }) }
+        }
     }
     fun addPLSample() { _uiState.update { state -> state.copy(plSamples = state.plSamples + PlasticLimitSample(id = (state.plSamples.maxOfOrNull { it.id } ?: 0) + 1)) } }
     fun removePLSample(id: Int) {
@@ -243,44 +258,51 @@ class AtterbergCoreViewModel(private val repository: IReportRepository) : ViewMo
 }
 
 @Composable
-fun AtterbergLimitsNeuralInterface(
+fun AtterbergLimitsScreenImproved(
     viewModel: AtterbergCoreViewModel,
-    reportIdToLoad: String? = null,
+    reportIdToLoad: String?,
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(reportIdToLoad) {
+        viewModel.loadReportForEditing(reportIdToLoad)
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        AtterbergLimitsSetupSection(viewModel, uiState)
+        AtterbergLimitsDataAndResultsSection(viewModel, uiState)
+    }
+}
+
+@Composable
+fun AtterbergLimitsSetupSection(
+    viewModel: AtterbergCoreViewModel,
+    uiState: AtterbergUiState
+) {
+    TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
+}
+
+@Composable
+fun AtterbergLimitsDataAndResultsSection(
+    viewModel: AtterbergCoreViewModel,
+    uiState: AtterbergUiState
+) {
     val context = LocalContext.current
+    DataPanel(stringResource(R.string.liquid_limit_input)) { EnhancedLLSampleInputSection(uiState.llSamples, uiState.llValidation, viewModel::onLLSampleValueChange, viewModel::addLLSample, viewModel::removeLLSample) }
+    DataPanel(stringResource(R.string.plastic_limit_input)) { PLSampleInputSection(uiState.plSamples, uiState.plValidation, viewModel::onPLSampleValueChange, viewModel::addPLSample, viewModel::removePLSample) }
+    ActionButtons(onCompute = viewModel::performAdvancedCalculations, onLoadExample = { viewModel.loadExampleData(context) })
 
-    LaunchedEffect(key1 = reportIdToLoad) { viewModel.loadReportForEditing(reportIdToLoad) }
-
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Spacer(Modifier.height(8.dp))
-            TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
-            DataPanel(stringResource(R.string.liquid_limit_input)) { EnhancedLLSampleInputSection(uiState.llSamples, uiState.llValidation, viewModel::onLLSampleValueChange, viewModel::addLLSample, viewModel::removeLLSample) }
-            DataPanel(stringResource(R.string.plastic_limit_input)) { PLSampleInputSection(uiState.plSamples, uiState.plValidation, viewModel::onPLSampleValueChange, viewModel::addPLSample, viewModel::removePLSample) }
-
-            ActionButtons(onCompute = viewModel::performAdvancedCalculations, onLoadExample = { viewModel.loadExampleData(context) })
-
-            AnimatedVisibility(visible = uiState.calculationResult != null, enter = fadeIn() + slideInVertically(), exit = fadeOut() + slideOutVertically()) {
-                uiState.calculationResult?.let { AdvancedAnalysisDashboard(it) }
-            }
-
-            AnimatedVisibility(visible = uiState.calculationResult == null && !uiState.isLoading) {
-                InfoPanel(stringResource(R.string.info_awaiting_data_atterberg))
-            }
-
-            Spacer(Modifier.height(32.dp))
-        }
-
-        AnimatedVisibility(visible = uiState.isLoading, enter = fadeIn(), exit = fadeOut(), modifier = Modifier.align(Alignment.Center)) {
-            CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+    AnimatedVisibility(visible = uiState.calculationResult != null) {
+        if (uiState.calculationResult != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            AdvancedAnalysisDashboard(uiState.calculationResult)
         }
     }
 }
@@ -466,4 +488,3 @@ fun PlasticityChart(modifier: Modifier = Modifier, liquidLimit: Float?, plastici
         }
     }
 }
-
