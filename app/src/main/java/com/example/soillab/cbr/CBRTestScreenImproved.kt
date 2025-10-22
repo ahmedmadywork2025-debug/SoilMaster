@@ -55,7 +55,7 @@ fun CBRTestScreenImproved(
     val highlightedValue = uiState.highlightedValue
 
     var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Setup", "Data & Curve", "Results")
+    val tabs = listOf("Setup", "Data & Results")
 
     LaunchedEffect(reportIdToLoad) { viewModel.loadReportForEditing(reportIdToLoad) }
     LaunchedEffect(userMessage) {
@@ -91,8 +91,7 @@ fun CBRTestScreenImproved(
             ) {
                 when (selectedTabIndex) {
                     0 -> SetupTab(viewModel, uiState)
-                    1 -> DataAndCurveTab(viewModel, uiState)
-                    2 -> ResultsTab(viewModel, uiState)
+                    1 -> DataAndResultsTab(viewModel, uiState)
                 }
             }
             AnimatedVisibility(
@@ -116,7 +115,7 @@ fun SetupTab(viewModel: CBRViewModel, uiState: CBRUiState) {
 }
 
 @Composable
-fun DataAndCurveTab(viewModel: CBRViewModel, uiState: CBRUiState) {
+fun DataAndResultsTab(viewModel: CBRViewModel, uiState: CBRUiState) {
     val context = LocalContext.current
     DataPointsList(uiState.points, viewModel::removePoint)
     CbrChart(
@@ -129,14 +128,12 @@ fun DataAndCurveTab(viewModel: CBRViewModel, uiState: CBRUiState) {
     )
     Spacer(Modifier.height(16.dp))
     ActionButtons(onCompute = viewModel::computeCBR, onLoadExample = { viewModel.loadExampleData(context) })
-}
 
-@Composable
-fun ResultsTab(viewModel: CBRViewModel, uiState: CBRUiState) {
     AnimatedVisibility(visible = uiState.result != null) {
         val result = uiState.result
         if (result != null) {
             Column {
+                Spacer(modifier = Modifier.height(16.dp))
                 ResultSection(result, uiState.requiredCbr, viewModel::onRequiredCbrChange)
                 if (result.insights != null) {
                     EngineeringPropertiesPanel(result.insights!!, result)

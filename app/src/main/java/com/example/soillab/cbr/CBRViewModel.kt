@@ -97,10 +97,19 @@ class CBRViewModel(private val repository: IReportRepository) : ViewModel() {
         val dialReading = _uiState.value.dialReadingInput.toDoubleOrNull()
         val factor = _uiState.value.parameters.provingRingFactor.toDoubleOrNull()
 
-        if (pen == null || dialReading == null || factor == null || factor == 0.0) {
-            _userMessage.value = "Please enter valid numbers for penetration, dial reading, and a non-zero factor."
+        if (pen == null) {
+            _userMessage.value = "Invalid input for Penetration."
             return
         }
+        if (dialReading == null) {
+            _userMessage.value = "Invalid input for Dial Reading."
+            return
+        }
+        if (factor == null || factor == 0.0) {
+            _userMessage.value = "Invalid or zero value for Proving Ring Factor in Setup."
+            return
+        }
+
         val load = dialReading * factor
         val newPoint = CBRDataPoint(penetration = pen, load = load)
         _uiState.update { state ->

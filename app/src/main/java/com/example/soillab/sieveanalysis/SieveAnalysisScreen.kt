@@ -56,7 +56,7 @@ fun SieveAnalysisScreenImproved(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Setup", "Data Entry", "Analysis & Results")
+    val tabs = listOf("Setup", "Data & Results")
 
     LaunchedEffect(reportIdToLoad) {
         viewModel.loadReportForEditing(reportIdToLoad)
@@ -82,8 +82,7 @@ fun SieveAnalysisScreenImproved(
         ) {
             when (selectedTabIndex) {
                 0 -> SetupTab(viewModel, uiState)
-                1 -> DataEntryTab(viewModel, uiState)
-                2 -> AnalysisAndResultsTab(uiState, viewModel)
+                1 -> DataAndResultsTab(viewModel, uiState)
             }
         }
     }
@@ -101,7 +100,7 @@ fun SetupTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
 }
 
 @Composable
-fun DataEntryTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
+fun DataAndResultsTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
     val context = LocalContext.current
     SieveDataTable(sieves = uiState.sieves, onSieveWeightChange = viewModel::onSieveWeightChange)
     AnimatedVisibility(visible = uiState.isCustomSpecEditing) {
@@ -114,12 +113,10 @@ fun DataEntryTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
             onSave = { viewModel.saveCustomSpecification(context) }
         )
     }
-}
 
-@Composable
-fun AnalysisAndResultsTab(uiState: SieveUiState, viewModel: SieveAnalysisViewModel) {
     AnimatedVisibility(visible = uiState.result != null) {
         if (uiState.result != null) {
+            Spacer(modifier = Modifier.height(16.dp))
             ResultDashboard(uiState.result, uiState, viewModel)
         }
     }

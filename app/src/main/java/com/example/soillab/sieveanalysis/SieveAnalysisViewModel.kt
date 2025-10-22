@@ -77,13 +77,16 @@ class SieveAnalysisViewModel(private val repository: IReportRepository) : ViewMo
     }
 
     fun onSieveWeightChange(opening: Double, retainedWeight: String) {
+        val isValidInput = retainedWeight.isEmpty() || retainedWeight.toDoubleOrNull() != null
         _uiState.update { state ->
             val updatedSieves = state.sieves.map {
-                if (it.opening == opening) it.copy(retainedWeight = retainedWeight) else it
+                if (it.opening == opening) it.copy(retainedWeight = if (isValidInput) retainedWeight else it.retainedWeight) else it
             }
             state.copy(sieves = updatedSieves)
         }
-        performCalculations()
+        if (isValidInput) {
+            performCalculations()
+        }
     }
 
     fun onTestInfoChange(newInfo: TestInfo) {
@@ -91,8 +94,18 @@ class SieveAnalysisViewModel(private val repository: IReportRepository) : ViewMo
     }
 
     fun onParamsChange(newParams: ClassificationParameters) {
-        _uiState.update { it.copy(parameters = newParams) }
-        performCalculations()
+        val llValid = newParams.liquidLimit.isEmpty() || newParams.liquidLimit.toDoubleOrNull() != null
+        val plValid = newParams.plasticLimit.isEmpty() || newParams.plasticLimit.toDoubleOrNull() != null
+        val weightValid = newParams.initialWeight.isEmpty() || newParams.initialWeight.toDoubleOrNull() != null
+
+        if (llValid && plValid && weightValid) {
+            _uiState.update { it.copy(parameters = newParams) }
+            performCalculations()
+        } else {
+            // Optionally, handle the invalid input case, e.g., by only updating the text field without triggering recalculation.
+            // For simplicity here, we can just update the state without triggering the calculation if the input is partial/invalid.
+            _uiState.update { it.copy(parameters = newParams) }
+        }
     }
 
     fun onSpecificationSelected(spec: Specification?) {

@@ -96,8 +96,20 @@ class ProctorViewModel(private val repository: IReportRepository) : ViewModel() 
             val moldWeight = state.parameters.moldWeight.toDoubleOrNull()
             val moldVolume = state.parameters.moldVolume.toDoubleOrNull()
 
-            if (moisture == null || wetSoilAndMoldWeight == null || moldWeight == null || moldVolume == null || moldVolume == 0.0) {
-                _userMessage.emit("Please fill all parameters and point data correctly.")
+            if (moisture == null) {
+                _userMessage.emit("Invalid input for Moisture Content.")
+                return@launch
+            }
+            if (wetSoilAndMoldWeight == null) {
+                _userMessage.emit("Invalid input for Wet Soil + Mold Weight.")
+                return@launch
+            }
+            if (moldWeight == null) {
+                _userMessage.emit("Invalid input for Mold Weight in Setup.")
+                return@launch
+            }
+            if (moldVolume == null || moldVolume == 0.0) {
+                _userMessage.emit("Invalid or zero value for Mold Volume in Setup.")
                 return@launch
             }
 
@@ -241,9 +253,8 @@ fun ProctorScreenImproved(
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val context = LocalContext.current
     var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Setup", "Data Entry", "Results")
+    val tabs = listOf("Setup", "Data & Results")
 
     LaunchedEffect(reportIdToLoad) {
         viewModel.loadReportForEditing(reportIdToLoad)
@@ -269,8 +280,7 @@ fun ProctorScreenImproved(
         ) {
             when (selectedTabIndex) {
                 0 -> SetupTab(uiState, viewModel)
-                1 -> DataEntryTab(uiState, viewModel)
-                2 -> ResultsTab(uiState, viewModel)
+                1 -> DataAndResultsTab(uiState, viewModel)
             }
         }
     }
@@ -286,7 +296,7 @@ fun SetupTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
 }
 
 @Composable
-fun DataEntryTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
+fun DataAndResultsTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
     val context = LocalContext.current
     DataPointsInputPanel(
         uiState = uiState,
@@ -299,12 +309,10 @@ fun DataEntryTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
         onCompute = { viewModel.calculateProctorCurve() },
         onLoadExample = { viewModel.loadExampleData(context) }
     )
-}
 
-@Composable
-fun ResultsTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
     AnimatedVisibility(visible = uiState.result != null) {
         if (uiState.result != null) {
+            Spacer(modifier = Modifier.height(16.dp))
             ResultDashboard(
                 result = uiState.result,
                 fieldMoistureContent = uiState.fieldMoistureContent,
