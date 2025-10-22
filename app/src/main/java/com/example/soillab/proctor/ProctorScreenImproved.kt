@@ -246,6 +246,7 @@ class ProctorViewModel(private val repository: IReportRepository) : ViewModel() 
 }
 
 
+import com.example.soillab.ui.components.ActionButtons
 import com.example.soillab.ui.components.TestInfoSection
 
 @Composable
@@ -269,6 +270,51 @@ fun ProctorScreenImproved(
     ) {
         ProctorSetupSection(uiState, viewModel)
         ProctorDataAndResultsSection(uiState, viewModel)
+    }
+}
+
+@Composable
+fun ProctorSetupSection(
+    uiState: ProctorUiState,
+    viewModel: ProctorViewModel
+) {
+    TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
+    TestSetupPanel(
+        parameters = uiState.parameters,
+        onParamsChange = viewModel::onParamsChange
+    )
+}
+
+@Composable
+fun ProctorDataAndResultsSection(
+    uiState: ProctorUiState,
+    viewModel: ProctorViewModel
+) {
+    val context = LocalContext.current
+    DataPointsInputPanel(
+        uiState = uiState,
+        onMoistureChange = viewModel::onMoistureInputChange,
+        onWetWeightChange = viewModel::onWetWeightInputChange,
+        onAddPoint = viewModel::addPoint
+    )
+    DataPointsList(points = uiState.points, onRemove = viewModel::removePoint)
+    ActionButtons(
+        onCompute = { viewModel.calculateProctorCurve() },
+        onLoadExample = { viewModel.loadExampleData(context) }
+    )
+
+    AnimatedVisibility(visible = uiState.result != null) {
+        if (uiState.result != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            ResultDashboard(
+                result = uiState.result,
+                fieldMoistureContent = uiState.fieldMoistureContent,
+                onFieldMoistureChange = viewModel::onFieldMoistureChange,
+                requiredCompaction = uiState.requiredCompaction,
+                onRequiredCompactionChange = viewModel::onRequiredCompactionChange,
+                testParameters = uiState.parameters
+            )
+        }
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
