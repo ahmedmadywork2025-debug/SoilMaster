@@ -48,6 +48,8 @@ import java.util.*
 import kotlin.math.log10
 import kotlin.math.pow
 import kotlin.math.sqrt
+import com.example.soillab.ui.components.TestInfoSection
+
 @Composable
 fun AtterbergLimitsScreenImproved(
     viewModel: AtterbergCoreViewModel,
@@ -55,56 +57,20 @@ fun AtterbergLimitsScreenImproved(
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Setup", "Data & Results")
 
     LaunchedEffect(reportIdToLoad) {
         viewModel.loadReportForEditing(reportIdToLoad)
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        TabRow(selectedTabIndex = selectedTabIndex) {
-            tabs.forEachIndexed { index, title ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
-                    text = { Text(title) }
-                )
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            when (selectedTabIndex) {
-                0 -> SetupTab(viewModel, uiState)
-                1 -> DataAndResultsTab(viewModel, uiState)
-            }
-        }
-    }
-}
-
-@Composable
-fun SetupTab(viewModel: AtterbergCoreViewModel, uiState: AtterbergUiState) {
-    TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
-}
-
-@Composable
-fun DataAndResultsTab(viewModel: AtterbergCoreViewModel, uiState: AtterbergUiState) {
-    val context = LocalContext.current
-    DataPanel(stringResource(R.string.liquid_limit_input)) { EnhancedLLSampleInputSection(uiState.llSamples, uiState.llValidation, viewModel::onLLSampleValueChange, viewModel::addLLSample, viewModel::removeLLSample) }
-    DataPanel(stringResource(R.string.plastic_limit_input)) { PLSampleInputSection(uiState.plSamples, uiState.plValidation, viewModel::onPLSampleValueChange, viewModel::addPLSample, viewModel::removePLSample) }
-    ActionButtons(onCompute = viewModel::performAdvancedCalculations, onLoadExample = { viewModel.loadExampleData(context) })
-
-    AnimatedVisibility(visible = uiState.calculationResult != null) {
-        if (uiState.calculationResult != null) {
-            Spacer(modifier = Modifier.height(16.dp))
-            AdvancedAnalysisDashboard(uiState.calculationResult)
-        }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        AtterbergLimitsSetupSection(viewModel, uiState)
+        AtterbergLimitsDataAndResultsSection(viewModel, uiState)
     }
 }
 

@@ -48,6 +48,8 @@ import kotlin.math.abs
 import kotlin.math.log10
 import kotlin.math.pow
 
+import com.example.soillab.ui.components.TestInfoSection
+
 @Composable
 fun SieveAnalysisScreenImproved(
     viewModel: SieveAnalysisViewModel,
@@ -55,70 +57,20 @@ fun SieveAnalysisScreenImproved(
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Setup", "Data & Results")
 
     LaunchedEffect(reportIdToLoad) {
         viewModel.loadReportForEditing(reportIdToLoad)
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        TabRow(selectedTabIndex = selectedTabIndex) {
-            tabs.forEachIndexed { index, title ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
-                    text = { Text(title) }
-                )
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            when (selectedTabIndex) {
-                0 -> SetupTab(viewModel, uiState)
-                1 -> DataAndResultsTab(viewModel, uiState)
-            }
-        }
-    }
-}
-
-@Composable
-fun SetupTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
-    TestInfoSection(uiState.testInfo, onInfoChange = viewModel::onTestInfoChange)
-    ParametersSection(
-        params = uiState.parameters,
-        onParamsChange = viewModel::onParamsChange,
-        sampleType = uiState.selectedSampleType,
-        onSampleTypeChange = viewModel::onSampleTypeChange
-    )
-}
-
-@Composable
-fun DataAndResultsTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
-    val context = LocalContext.current
-    SieveDataTable(sieves = uiState.sieves, onSieveWeightChange = viewModel::onSieveWeightChange)
-    AnimatedVisibility(visible = uiState.isCustomSpecEditing) {
-        CustomSpecEditorPanel(
-            sieves = uiState.customSpecSieves,
-            limits = uiState.customSpecLimits,
-            onLimitChange = viewModel::onCustomSpecLimitChange,
-            specName = uiState.customSpecName,
-            onNameChange = viewModel::onCustomSpecNameChange,
-            onSave = { viewModel.saveCustomSpecification(context) }
-        )
-    }
-
-    AnimatedVisibility(visible = uiState.result != null) {
-        if (uiState.result != null) {
-            Spacer(modifier = Modifier.height(16.dp))
-            ResultDashboard(uiState.result, uiState, viewModel)
-        }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        SieveAnalysisSetupSection(viewModel, uiState)
+        SieveAnalysisDataAndResultsSection(viewModel, uiState)
     }
 }
 

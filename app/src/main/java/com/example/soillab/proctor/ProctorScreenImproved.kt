@@ -246,6 +246,8 @@ class ProctorViewModel(private val repository: IReportRepository) : ViewModel() 
 }
 
 
+import com.example.soillab.ui.components.TestInfoSection
+
 @Composable
 fun ProctorScreenImproved(
     viewModel: ProctorViewModel,
@@ -253,75 +255,20 @@ fun ProctorScreenImproved(
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Setup", "Data & Results")
 
     LaunchedEffect(reportIdToLoad) {
         viewModel.loadReportForEditing(reportIdToLoad)
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        TabRow(selectedTabIndex = selectedTabIndex) {
-            tabs.forEachIndexed { index, title ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
-                    text = { Text(title) }
-                )
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            when (selectedTabIndex) {
-                0 -> SetupTab(uiState, viewModel)
-                1 -> DataAndResultsTab(uiState, viewModel)
-            }
-        }
-    }
-}
-
-@Composable
-fun SetupTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
-    TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
-    TestSetupPanel(
-        parameters = uiState.parameters,
-        onParamsChange = viewModel::onParamsChange
-    )
-}
-
-@Composable
-fun DataAndResultsTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
-    val context = LocalContext.current
-    DataPointsInputPanel(
-        uiState = uiState,
-        onMoistureChange = viewModel::onMoistureInputChange,
-        onWetWeightChange = viewModel::onWetWeightInputChange,
-        onAddPoint = viewModel::addPoint
-    )
-    DataPointsList(points = uiState.points, onRemove = viewModel::removePoint)
-    ActionButtons(
-        onCompute = { viewModel.calculateProctorCurve() },
-        onLoadExample = { viewModel.loadExampleData(context) }
-    )
-
-    AnimatedVisibility(visible = uiState.result != null) {
-        if (uiState.result != null) {
-            Spacer(modifier = Modifier.height(16.dp))
-            ResultDashboard(
-                result = uiState.result,
-                fieldMoistureContent = uiState.fieldMoistureContent,
-                onFieldMoistureChange = viewModel::onFieldMoistureChange,
-                requiredCompaction = uiState.requiredCompaction,
-                onRequiredCompactionChange = viewModel::onRequiredCompactionChange,
-                testParameters = uiState.parameters
-            )
-        }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        ProctorSetupSection(uiState, viewModel)
+        ProctorDataAndResultsSection(uiState, viewModel)
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
