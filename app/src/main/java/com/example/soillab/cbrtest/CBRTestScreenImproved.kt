@@ -286,7 +286,9 @@ fun ResultsTab(viewModel: CBRViewModel, uiState: CBRUiState) {
         if (result != null) {
             Column {
                 ResultSection(result, uiState.requiredCbr, viewModel::onRequiredCbrChange)
-                result.insights?.let { EngineeringPropertiesPanel(it, result) }
+                if (result.insights != null) {
+                    EngineeringPropertiesPanel(result.insights!!, result)
+                }
             }
         }
     }

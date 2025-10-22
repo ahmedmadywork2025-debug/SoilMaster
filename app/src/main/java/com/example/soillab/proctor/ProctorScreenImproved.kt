@@ -304,9 +304,9 @@ fun DataEntryTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
 @Composable
 fun ResultsTab(uiState: ProctorUiState, viewModel: ProctorViewModel) {
     AnimatedVisibility(visible = uiState.result != null) {
-        uiState.result?.let { result ->
+        if (uiState.result != null) {
             ResultDashboard(
-                result = result,
+                result = uiState.result,
                 fieldMoistureContent = uiState.fieldMoistureContent,
                 onFieldMoistureChange = viewModel::onFieldMoistureChange,
                 requiredCompaction = uiState.requiredCompaction,

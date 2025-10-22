@@ -298,7 +298,9 @@ fun DataEntryTab(viewModel: AtterbergCoreViewModel, uiState: AtterbergUiState) {
 @Composable
 fun AnalysisAndResultsTab(uiState: AtterbergUiState) {
     AnimatedVisibility(visible = uiState.calculationResult != null) {
-        uiState.calculationResult?.let { AdvancedAnalysisDashboard(it) }
+        if (uiState.calculationResult != null) {
+            AdvancedAnalysisDashboard(uiState.calculationResult)
+        }
     }
 }
 

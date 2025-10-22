@@ -375,7 +375,9 @@ fun DataEntryTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
 @Composable
 fun AnalysisAndResultsTab(uiState: SieveUiState, viewModel: SieveAnalysisViewModel) {
     AnimatedVisibility(visible = uiState.result != null) {
-        uiState.result?.let { ResultDashboard(it, uiState, viewModel) }
+        if (uiState.result != null) {
+            ResultDashboard(uiState.result, uiState, viewModel)
+        }
     }
 }
 
