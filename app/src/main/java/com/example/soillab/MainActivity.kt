@@ -29,8 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.soillab.cbrtest.CBRTestScreenImproved
-import com.example.soillab.cbrtest.CBRViewModel
+import com.example.soillab.cbr.CBRTestScreenImproved
+import com.example.soillab.cbr.CBRViewModel
 import com.example.soillab.di.AppContainer
 import com.example.soillab.di.AppViewModelFactory
 import com.example.soillab.liquidlimittest.AtterbergCoreViewModel

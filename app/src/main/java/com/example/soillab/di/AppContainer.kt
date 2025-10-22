@@ -3,7 +3,7 @@ package com.example.soillab.di
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.soillab.cbrtest.CBRViewModel
+import com.example.soillab.cbr.CBRViewModel
 import com.example.soillab.data.IReportRepository
 import com.example.soillab.data.TestReportRepository
 import com.example.soillab.liquidlimittest.AtterbergCoreViewModel
