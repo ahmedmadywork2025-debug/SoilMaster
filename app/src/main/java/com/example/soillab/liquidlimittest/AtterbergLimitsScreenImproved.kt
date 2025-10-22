@@ -241,19 +241,31 @@ class AtterbergCoreViewModel(private val repository: IReportRepository) : ViewMo
         return (minBlows.toInt()..maxBlows.toInt()).map { blows -> Entry(blows.toFloat(), (slope * log10(blows.toFloat()) + intercept).toFloat()) }
     }
 }
-
 @Composable
-fun AtterbergLimitsNeuralInterface(
+fun AtterbergLimitsScreenImproved(
     viewModel: AtterbergCoreViewModel,
-    reportIdToLoad: String? = null,
+    reportIdToLoad: String?,
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val context = LocalContext.current
+    var selectedTabIndex by remember { mutableStateOf(0) }
+    val tabs = listOf("Setup", "Data Entry", "Analysis & Results")
 
-    LaunchedEffect(key1 = reportIdToLoad) { viewModel.loadReportForEditing(reportIdToLoad) }
+    LaunchedEffect(reportIdToLoad) {
+        viewModel.loadReportForEditing(reportIdToLoad)
+    }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        TabRow(selectedTabIndex = selectedTabIndex) {
+            tabs.forEachIndexed { index, title ->
+                Tab(
+                    selected = selectedTabIndex == index,
+                    onClick = { selectedTabIndex = index },
+                    text = { Text(title) }
+                )
+            }
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -261,27 +273,32 @@ fun AtterbergLimitsNeuralInterface(
                 .padding(horizontal = 16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Spacer(Modifier.height(8.dp))
-            TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
-            DataPanel(stringResource(R.string.liquid_limit_input)) { EnhancedLLSampleInputSection(uiState.llSamples, uiState.llValidation, viewModel::onLLSampleValueChange, viewModel::addLLSample, viewModel::removeLLSample) }
-            DataPanel(stringResource(R.string.plastic_limit_input)) { PLSampleInputSection(uiState.plSamples, uiState.plValidation, viewModel::onPLSampleValueChange, viewModel::addPLSample, viewModel::removePLSample) }
-
-            ActionButtons(onCompute = viewModel::performAdvancedCalculations, onLoadExample = { viewModel.loadExampleData(context) })
-
-            AnimatedVisibility(visible = uiState.calculationResult != null, enter = fadeIn() + slideInVertically(), exit = fadeOut() + slideOutVertically()) {
-                uiState.calculationResult?.let { AdvancedAnalysisDashboard(it) }
+            when (selectedTabIndex) {
+                0 -> SetupTab(viewModel, uiState)
+                1 -> DataEntryTab(viewModel, uiState)
+                2 -> AnalysisAndResultsTab(uiState)
             }
-
-            AnimatedVisibility(visible = uiState.calculationResult == null && !uiState.isLoading) {
-                InfoPanel(stringResource(R.string.info_awaiting_data_atterberg))
-            }
-
-            Spacer(Modifier.height(32.dp))
         }
+    }
+}
 
-        AnimatedVisibility(visible = uiState.isLoading, enter = fadeIn(), exit = fadeOut(), modifier = Modifier.align(Alignment.Center)) {
-            CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-        }
+@Composable
+fun SetupTab(viewModel: AtterbergCoreViewModel, uiState: AtterbergUiState) {
+    TestInfoSection(uiState.testInfo, viewModel::onTestInfoChange)
+}
+
+@Composable
+fun DataEntryTab(viewModel: AtterbergCoreViewModel, uiState: AtterbergUiState) {
+    val context = LocalContext.current
+    DataPanel(stringResource(R.string.liquid_limit_input)) { EnhancedLLSampleInputSection(uiState.llSamples, uiState.llValidation, viewModel::onLLSampleValueChange, viewModel::addLLSample, viewModel::removeLLSample) }
+    DataPanel(stringResource(R.string.plastic_limit_input)) { PLSampleInputSection(uiState.plSamples, uiState.plValidation, viewModel::onPLSampleValueChange, viewModel::addPLSample, viewModel::removePLSample) }
+    ActionButtons(onCompute = viewModel::performAdvancedCalculations, onLoadExample = { viewModel.loadExampleData(context) })
+}
+
+@Composable
+fun AnalysisAndResultsTab(uiState: AtterbergUiState) {
+    AnimatedVisibility(visible = uiState.calculationResult != null) {
+        uiState.calculationResult?.let { AdvancedAnalysisDashboard(it) }
     }
 }
 
@@ -466,4 +483,3 @@ fun PlasticityChart(modifier: Modifier = Modifier, liquidLimit: Float?, plastici
         }
     }
 }
-

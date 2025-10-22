@@ -190,10 +190,9 @@ class CBRViewModel(private val repository: IReportRepository) : ViewModel() {
         _userMessage.value = null
     }
 }
-
 // --- Main CBR Screen ---
 @Composable
-fun CBRTestScreen(
+fun CBRTestScreenImproved(
     viewModel: CBRViewModel,
     reportIdToLoad: String?,
     onNavigateBack: () -> Unit
@@ -201,9 +200,10 @@ fun CBRTestScreen(
     val uiState by viewModel.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val userMessage by viewModel.userMessage.collectAsState()
-    val highlightedValue = uiState.highlightedValue // Corrected state access
+    val highlightedValue = uiState.highlightedValue
 
-    val context = LocalContext.current
+    var selectedTabIndex by remember { mutableStateOf(0) }
+    val tabs = listOf("Setup", "Data & Curve", "Results")
 
     LaunchedEffect(reportIdToLoad) { viewModel.loadReportForEditing(reportIdToLoad) }
     LaunchedEffect(userMessage) {
@@ -212,61 +212,82 @@ fun CBRTestScreen(
             viewModel.clearUserMessage()
         }
     }
-    LaunchedEffect(highlightedValue) { // Corrected state access
+    LaunchedEffect(highlightedValue) {
         highlightedValue?.let {
             snackbarHostState.showSnackbar(it)
         }
     }
 
-    // This screen does not need a Scaffold because it's hosted within the main SoilLabApp Scaffold
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Spacer(Modifier.height(8.dp))
-            TestInfoSection(uiState.parameters.testInfo) { newInfo ->
-                viewModel.onParamsChange(uiState.parameters.copy(testInfo = newInfo))
+    Column(modifier = Modifier.fillMaxSize()) {
+        TabRow(selectedTabIndex = selectedTabIndex) {
+            tabs.forEachIndexed { index, title ->
+                Tab(
+                    selected = selectedTabIndex == index,
+                    onClick = { selectedTabIndex = index },
+                    text = { Text(title) }
+                )
             }
-            InputAndParametersSection(viewModel, uiState)
-            DataPointsList(uiState.points, viewModel::removePoint)
-            CbrChart(
-                points = uiState.points,
-                correctedPoints = uiState.correctedPoints,
-                onValueSelected = viewModel::onChartValueSelected,
-                modifier = Modifier.fillMaxWidth().height(300.dp)
-            )
-            Spacer(Modifier.height(16.dp))
+        }
 
-            ActionButtons(onCompute = viewModel::computeCBR, onLoadExample = { viewModel.loadExampleData(context) })
-
-            AnimatedVisibility(visible = uiState.result != null) {
-                val result = uiState.result
-                if (result != null) {
-                    Column {
-                        ResultSection(result, uiState.requiredCbr, viewModel::onRequiredCbrChange)
-                        result.insights?.let { EngineeringPropertiesPanel(it, result) }
-                    }
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(horizontal = 16.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                when (selectedTabIndex) {
+                    0 -> SetupTab(viewModel, uiState)
+                    1 -> DataAndCurveTab(viewModel, uiState)
+                    2 -> ResultsTab(viewModel, uiState)
                 }
             }
-
-
-            AnimatedVisibility(visible = uiState.result == null && !uiState.isLoading) {
-                InfoPanel(stringResource(R.string.info_awaiting_data_cbr))
+            AnimatedVisibility(
+                visible = uiState.isLoading,
+                enter = fadeIn(),
+                exit = fadeOut(),
+                modifier = Modifier.align(Alignment.Center)
+            ) {
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
             }
-
-            Spacer(Modifier.height(32.dp))
         }
-        AnimatedVisibility(
-            visible = uiState.isLoading,
-            enter = fadeIn(),
-            exit = fadeOut(),
-            modifier = Modifier.align(Alignment.Center)
-        ) {
-            CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+    }
+}
+
+@Composable
+fun SetupTab(viewModel: CBRViewModel, uiState: CBRUiState) {
+    TestInfoSection(uiState.parameters.testInfo) { newInfo ->
+        viewModel.onParamsChange(uiState.parameters.copy(testInfo = newInfo))
+    }
+    InputAndParametersSection(viewModel, uiState)
+}
+
+@Composable
+fun DataAndCurveTab(viewModel: CBRViewModel, uiState: CBRUiState) {
+    val context = LocalContext.current
+    DataPointsList(uiState.points, viewModel::removePoint)
+    CbrChart(
+        points = uiState.points,
+        correctedPoints = uiState.correctedPoints,
+        onValueSelected = viewModel::onChartValueSelected,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    )
+    Spacer(Modifier.height(16.dp))
+    ActionButtons(onCompute = viewModel::computeCBR, onLoadExample = { viewModel.loadExampleData(context) })
+}
+
+@Composable
+fun ResultsTab(viewModel: CBRViewModel, uiState: CBRUiState) {
+    AnimatedVisibility(visible = uiState.result != null) {
+        val result = uiState.result
+        if (result != null) {
+            Column {
+                ResultSection(result, uiState.requiredCbr, viewModel::onRequiredCbrChange)
+                result.insights?.let { EngineeringPropertiesPanel(it, result) }
+            }
         }
     }
 }
@@ -553,4 +574,3 @@ fun CbrChart(
         modifier = modifier
     )
 }
-

@@ -29,17 +29,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.soillab.cbrtest.CBRTestScreen
+import com.example.soillab.cbrtest.CBRTestScreenImproved
 import com.example.soillab.cbrtest.CBRViewModel
 import com.example.soillab.di.AppContainer
 import com.example.soillab.di.AppViewModelFactory
 import com.example.soillab.liquidlimittest.AtterbergCoreViewModel
-import com.example.soillab.liquidlimittest.AtterbergLimitsNeuralInterface
+import com.example.soillab.liquidlimittest.AtterbergLimitsScreenImproved
 import com.example.soillab.proctor.ProctorScreenImproved
 import com.example.soillab.proctor.ProctorViewModel
 import com.example.soillab.reports.ReportsHubScreen
 import com.example.soillab.reports.ReportsViewModel
-import com.example.soillab.sieveanalysis.SieveAnalysisScreen
+import com.example.soillab.sieveanalysis.SieveAnalysisScreenImproved
 import com.example.soillab.sieveanalysis.SieveAnalysisViewModel
 import com.example.soillab.ui.BootScreen
 import com.example.soillab.ui.HubScreen
@@ -200,7 +200,7 @@ fun SoilLabApp(appContainer: AppContainer, languageViewModel: LanguageViewModel)
                     AppScreen.DASHBOARD -> HubScreen { dest, id ->
                         coordinatorViewModel.navigateTo(dest, id)
                     }
-                    AppScreen.ATTERBERG_LIMITS_TEST -> AtterbergLimitsNeuralInterface(
+                    AppScreen.ATTERBERG_LIMITS_TEST -> AtterbergLimitsScreenImproved(
                         viewModel = atterbergViewModel,
                         reportIdToLoad = reportIdToEdit,
                         onNavigateBack = { coordinatorViewModel.goBack() }
@@ -213,12 +213,12 @@ fun SoilLabApp(appContainer: AppContainer, languageViewModel: LanguageViewModel)
                         onLoadProctorReport = { coordinatorViewModel.navigateTo(AppScreen.PROCTOR_TEST, it) },
                         onNavigateBack = { coordinatorViewModel.goBack() }
                     )
-                    AppScreen.CBR_TEST -> CBRTestScreen(
+                    AppScreen.CBR_TEST -> CBRTestScreenImproved(
                         viewModel = cbrViewModel,
                         reportIdToLoad = reportIdToEdit,
                         onNavigateBack = { coordinatorViewModel.goBack() }
                     )
-                    AppScreen.SIEVE_ANALYSIS -> SieveAnalysisScreen(
+                    AppScreen.SIEVE_ANALYSIS -> SieveAnalysisScreenImproved(
                         viewModel = sieveViewModel,
                         reportIdToLoad = reportIdToEdit,
                         onNavigateBack = { coordinatorViewModel.goBack() }

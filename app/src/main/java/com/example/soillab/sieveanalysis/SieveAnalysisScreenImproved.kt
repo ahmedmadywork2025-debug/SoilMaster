@@ -304,35 +304,31 @@ class SieveAnalysisViewModel(private val repository: IReportRepository) : ViewMo
         _userMessage.value = null
     }
 }
-
-// --- Main Composable ---
 @Composable
-fun SieveAnalysisScreen(
+fun SieveAnalysisScreenImproved(
     viewModel: SieveAnalysisViewModel,
     reportIdToLoad: String?,
     onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val snackbarHostState = remember { SnackbarHostState() }
-    val userMessage by viewModel.userMessage.collectAsState()
-    val highlightedValue = uiState.highlightedValue
-    val context = LocalContext.current
+    var selectedTabIndex by remember { mutableStateOf(0) }
+    val tabs = listOf("Setup", "Data Entry", "Analysis & Results")
 
-    LaunchedEffect(reportIdToLoad) { viewModel.loadReportForEditing(reportIdToLoad) }
-    LaunchedEffect(userMessage) {
-        userMessage?.let {
-            snackbarHostState.showSnackbar(it)
-            viewModel.clearUserMessage()
-        }
-    }
-    LaunchedEffect(highlightedValue) {
-        highlightedValue?.let {
-            snackbarHostState.showSnackbar(it)
-            viewModel.clearHighlightedValue()
-        }
+    LaunchedEffect(reportIdToLoad) {
+        viewModel.loadReportForEditing(reportIdToLoad)
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        TabRow(selectedTabIndex = selectedTabIndex) {
+            tabs.forEachIndexed { index, title ->
+                Tab(
+                    selected = selectedTabIndex == index,
+                    onClick = { selectedTabIndex = index },
+                    text = { Text(title) }
+                )
+            }
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -340,41 +336,49 @@ fun SieveAnalysisScreen(
                 .padding(horizontal = 16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Spacer(Modifier.height(8.dp))
-            TestInfoSection(uiState.testInfo, onInfoChange = viewModel::onTestInfoChange)
-            ParametersSection(
-                params = uiState.parameters,
-                onParamsChange = viewModel::onParamsChange,
-                sampleType = uiState.selectedSampleType,
-                onSampleTypeChange = viewModel::onSampleTypeChange
-            )
-            SieveDataTable(sieves = uiState.sieves, onSieveWeightChange = viewModel::onSieveWeightChange)
-
-            AnimatedVisibility(visible = uiState.isCustomSpecEditing) {
-                CustomSpecEditorPanel(
-                    sieves = uiState.customSpecSieves,
-                    limits = uiState.customSpecLimits,
-                    onLimitChange = viewModel::onCustomSpecLimitChange,
-                    specName = uiState.customSpecName,
-                    onNameChange = viewModel::onCustomSpecNameChange,
-                    onSave = { viewModel.saveCustomSpecification(context) }
-                )
+            when (selectedTabIndex) {
+                0 -> SetupTab(viewModel, uiState)
+                1 -> DataEntryTab(viewModel, uiState)
+                2 -> AnalysisAndResultsTab(uiState, viewModel)
             }
-
-
-            AnimatedVisibility(visible = uiState.result != null) {
-                uiState.result?.let { ResultDashboard(it, uiState, viewModel) }
-            }
-
-            Spacer(Modifier.height(32.dp))
-        }
-        AnimatedVisibility(visible = uiState.isLoading, enter = fadeIn(), exit = fadeOut(), modifier = Modifier.align(Alignment.Center)) {
-            CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
         }
     }
 }
 
-// --- UI Sections ---
+@Composable
+fun SetupTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
+    TestInfoSection(uiState.testInfo, onInfoChange = viewModel::onTestInfoChange)
+    ParametersSection(
+        params = uiState.parameters,
+        onParamsChange = viewModel::onParamsChange,
+        sampleType = uiState.selectedSampleType,
+        onSampleTypeChange = viewModel::onSampleTypeChange
+    )
+}
+
+@Composable
+fun DataEntryTab(viewModel: SieveAnalysisViewModel, uiState: SieveUiState) {
+    val context = LocalContext.current
+    SieveDataTable(sieves = uiState.sieves, onSieveWeightChange = viewModel::onSieveWeightChange)
+    AnimatedVisibility(visible = uiState.isCustomSpecEditing) {
+        CustomSpecEditorPanel(
+            sieves = uiState.customSpecSieves,
+            limits = uiState.customSpecLimits,
+            onLimitChange = viewModel::onCustomSpecLimitChange,
+            specName = uiState.customSpecName,
+            onNameChange = viewModel::onCustomSpecNameChange,
+            onSave = { viewModel.saveCustomSpecification(context) }
+        )
+    }
+}
+
+@Composable
+fun AnalysisAndResultsTab(uiState: SieveUiState, viewModel: SieveAnalysisViewModel) {
+    AnimatedVisibility(visible = uiState.result != null) {
+        uiState.result?.let { ResultDashboard(it, uiState, viewModel) }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ParametersSection(
@@ -1044,4 +1048,3 @@ fun setupGradationChart(chart: LineChart, colorScheme: ColorScheme) {
         }
     }
 }
-
