@@ -10,11 +10,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.soillab.R
 import com.example.soillab.util.LanguageViewModel
+import com.example.soillab.util.ThemeMode
+import com.example.soillab.util.ThemeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(languageViewModel: LanguageViewModel) {
+fun SettingsScreen(languageViewModel: LanguageViewModel, themeViewModel: ThemeViewModel) {
     val currentLanguage by languageViewModel.currentLanguage.collectAsState()
+    val currentTheme by themeViewModel.currentThemeMode.collectAsState()
 
     Column(
         modifier = Modifier
@@ -42,6 +45,38 @@ fun SettingsScreen(languageViewModel: LanguageViewModel) {
                 shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2)
             ) {
                 Text(stringResource(R.string.arabic))
+            }
+        }
+
+        Divider()
+
+        Text(
+            text = stringResource(id = R.string.select_theme),
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
+            SegmentedButton(
+                selected = currentTheme == ThemeMode.SYSTEM,
+                onClick = { themeViewModel.setThemeMode(ThemeMode.SYSTEM) },
+                shape = SegmentedButtonDefaults.itemShape(index = 0, count = 3)
+            ) {
+                Text(stringResource(R.string.theme_system))
+            }
+            SegmentedButton(
+                selected = currentTheme == ThemeMode.LIGHT,
+                onClick = { themeViewModel.setThemeMode(ThemeMode.LIGHT) },
+                shape = SegmentedButtonDefaults.itemShape(index = 1, count = 3)
+            ) {
+                Text(stringResource(R.string.theme_light))
+            }
+            SegmentedButton(
+                selected = currentTheme == ThemeMode.DARK,
+                onClick = { themeViewModel.setThemeMode(ThemeMode.DARK) },
+                shape = SegmentedButtonDefaults.itemShape(index = 2, count = 3)
+            ) {
+                Text(stringResource(R.string.theme_dark))
             }
         }
     }

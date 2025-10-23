@@ -46,6 +46,9 @@ import com.example.soillab.ui.HubScreen
 import com.example.soillab.ui.SettingsScreen
 import com.example.soillab.ui.theme.SoilLabTheme
 import com.example.soillab.util.LanguageViewModel
+import com.example.soillab.util.ThemeMode
+import com.example.soillab.util.ThemeViewModel
+import androidx.compose.foundation.isSystemInDarkTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -96,6 +99,7 @@ class AppCoordinatorViewModel : ViewModel() {
 class MainActivity : ComponentActivity() {
     private lateinit var appContainer: AppContainer
     private val languageViewModel: LanguageViewModel by viewModels()
+    private val themeViewModel: ThemeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,9 +108,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             val currentLanguage by languageViewModel.currentLanguage.collectAsState()
             val localizedContext = remember(currentLanguage) { this.wrapInLocale(currentLanguage) }
+            val themeMode by themeViewModel.currentThemeMode.collectAsState()
 
             CompositionLocalProvider(LocalContext provides localizedContext) {
-                SoilLabTheme {
+                val isDark = when (themeMode) {
+                    ThemeMode.DARK -> true
+                    ThemeMode.LIGHT -> false
+                    ThemeMode.SYSTEM -> isSystemInDarkTheme()
+                }
+                SoilLabTheme(darkTheme = isDark) {
                     SoilLabApp(appContainer = appContainer, languageViewModel = languageViewModel)
                 }
             }
@@ -234,7 +244,7 @@ fun SoilLabApp(appContainer: AppContainer, languageViewModel: LanguageViewModel)
                         }
                     }
                     AppScreen.SETTINGS -> {
-                        SettingsScreen(languageViewModel = languageViewModel)
+                        SettingsScreen(languageViewModel = languageViewModel, themeViewModel = themeViewModel)
                     }
                     else -> {}
                 }

@@ -25,6 +25,12 @@
     <string name="english">English</string>
     <string name="arabic">العربية</string>
 
+    <!-- Theme Settings -->
+    <string name="select_theme">اختر النمط</string>
+    <string name="theme_system">إعداد النظام</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+
     <!-- Hub Screen -->
     <string name="hub_atterberg">حدود أتربرج</string>
     <string name="hub_cbr">اختبار CBR</string>
