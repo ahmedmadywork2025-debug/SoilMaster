@@ -25,6 +25,12 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
 
+    <!-- Theme Settings -->
+    <string name="select_theme">Select Theme</string>
+    <string name="theme_system">System default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
     <!-- Hub Screen -->
     <string name="hub_atterberg">Atterberg Limits</string>
     <string name="hub_cbr">CBR Test</string>

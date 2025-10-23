@@ -18,6 +18,11 @@ val Neutral400 = Color(0xFF8A93A7) // Secondary text, icons, borders
 val Neutral800 = Color(0xFF333333) // Dark element for potential light theme
 val Neutral900 = Color(0xFF121212) // Alternative very dark background
 
+// Light neutrals for surfaces and outlines in Light theme
+val Neutral50 = Color(0xFFF9FAFB)   // Very light surface/background
+val Neutral100 = Color(0xFFF3F4F6)  // Surface variant on light
+val Neutral200 = Color(0xFFE5E7EB)  // Outlines/dividers on light
+
 // Functional Colors
 val Green500 = Color(0xFF4CAF50)  // Success states
 val Yellow500 = Color(0xFFFFC107) // Warning states
