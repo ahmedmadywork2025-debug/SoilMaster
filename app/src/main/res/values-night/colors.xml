@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Professional White Theme Colors -->
+    <!-- Dark Mode Theme Colors -->
     
     <!-- Primary Colors -->
-    <color name="primaryColor">#2196F3</color>              <!-- Professional Blue -->
+    <color name="primaryColor">#2196F3</color>              <!-- Professional Blue (same as light) -->
     <color name="primaryVariant">#1976D2</color>           <!-- Darker Blue -->
     <color name="primaryText">#FFFFFF</color>              <!-- White text on primary -->
     
@@ -12,23 +12,23 @@
     <color name="secondaryVariant">#00ACC1</color>          <!-- Darker teal -->
     
     <!-- Background Colors -->
-    <color name="background">#FFFFFF</color>                <!-- Pure white background -->
-    <color name="surface">#FFFFFF</color>                   <!-- White surface -->
-    <color name="cardBackground">#FFFFFF</color>            <!-- White cards -->
+    <color name="background">#121212</color>                <!-- Dark background -->
+    <color name="surface">#1E1E1E</color>                   <!-- Dark surface -->
+    <color name="cardBackground">#1E1E1E</color>            <!-- Dark cards -->
     
     <!-- Text Colors -->
-    <color name="textPrimary">#212121</color>               <!-- Dark text on light background -->
-    <color name="textSecondary">#757575</color>             <!-- Medium gray text -->
-    <color name="textHint">#BDBDBD</color>                  <!-- Light gray hint text -->
+    <color name="textPrimary">#FFFFFF</color>               <!-- White text on dark background -->
+    <color name="textSecondary">#B3B3B3</color>             <!-- Light gray text -->
+    <color name="textHint">#666666</color>                  <!-- Dark gray hint text -->
     <color name="textOnPrimary">#FFFFFF</color>             <!-- White text on primary color -->
     
     <!-- Button Colors -->
     <color name="buttonBackground">#2196F3</color>          <!-- Primary button background -->
     <color name="buttonText">#FFFFFF</color>                <!-- White button text -->
-    <color name="buttonBackgroundSecondary">#F5F5F5</color> <!-- Light gray secondary button -->
+    <color name="buttonBackgroundSecondary">#2C2C2C</color> <!-- Dark gray secondary button -->
     <color name="buttonTextSecondary">#2196F3</color>       <!-- Blue text on secondary button -->
-    <color name="buttonBorder">#E0E0E0</color>              <!-- Light border -->
-    <color name="buttonBorderSecondary">#BDBDBD</color>     <!-- Medium border -->
+    <color name="buttonBorder">#404040</color>              <!-- Dark border -->
+    <color name="buttonBorderSecondary">#666666</color>     <!-- Medium dark border -->
     
     <!-- Status and Error Colors -->
     <color name="errorColor">#F44336</color>                <!-- Red for errors -->
@@ -36,7 +36,7 @@
     <color name="warningColor">#FF9800</color>              <!-- Orange for warnings -->
     
     <!-- Utility Colors -->
-    <color name="divider">#E0E0E0</color>                   <!-- Light divider -->
+    <color name="divider">#404040</color>                   <!-- Dark divider -->
     <color name="overlay">#80000000</color>                 <!-- Semi-transparent black overlay -->
     
     <!-- Social Media Colors -->
@@ -47,18 +47,18 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#808080</color>
-    <color name="lightGray">#F5F5F5</color>
-    <color name="darkGray">#424242</color>
+    <color name="lightGray">#2C2C2C</color>
+    <color name="darkGray">#B3B3B3</color>
     
     <!-- Legacy colors for compatibility -->
-    <color name="backgroundColor">#FFFFFF</color>
-    <color name="cardTextColor">#212121</color>
-    <color name="light_gray">#B0B0B0</color>
+    <color name="backgroundColor">#121212</color>
+    <color name="cardTextColor">#FFFFFF</color>
+    <color name="light_gray">#666666</color>
     <color name="red">#F44336</color>
     <color name="orange">#FF9800</color>
     <color name="green">#4CAF50</color>
     <color name="blue">#2196F3</color>
-    <color name="secondaryText">#757575</color>
+    <color name="secondaryText">#B3B3B3</color>
     <color name="buttonTextColor">#FFFFFF</color>
-    <color name="dark_gray">#212121</color>
+    <color name="dark_gray">#B3B3B3</color>
 </resources>

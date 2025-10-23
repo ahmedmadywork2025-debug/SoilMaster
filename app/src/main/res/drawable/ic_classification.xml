@@ -4,7 +4,38 @@
     android:viewportWidth="24"
     android:viewportHeight="24"
     android:tint="?attr/colorControlNormal">
+    <!-- Professional Soil Classification Icon -->
     <path
-        android:fillColor="@android:color/black"
-        android:pathData="M12,2L1,9l11,7 9,-5.73V17h2V9L12,2zm0,13L3.74,9 12,4.26 20.26,9 12,15zM21,19H3v2h18v-2z"/>
+        android:fillColor="@color/primaryColor"
+        android:pathData="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8z"/>
+    <!-- Soil particles -->
+    <circle
+        android:fillColor="@color/secondaryColor"
+        android:cx="8"
+        android:cy="8"
+        android:r="1.5"/>
+    <circle
+        android:fillColor="@color/primaryVariant"
+        android:cx="12"
+        android:cy="10"
+        android:r="1"/>
+    <circle
+        android:fillColor="@color/secondaryColor"
+        android:cx="16"
+        android:cy="9"
+        android:r="1.2"/>
+    <circle
+        android:fillColor="@color/primaryVariant"
+        android:cx="10"
+        android:cy="14"
+        android:r="0.8"/>
+    <circle
+        android:fillColor="@color/secondaryColor"
+        android:cx="14"
+        android:cy="15"
+        android:r="1.1"/>
+    <!-- Classification lines -->
+    <path
+        android:fillColor="@color/textPrimary"
+        android:pathData="M6,16h12v1H6V16zM6,18h8v1H6V18z"/>
 </vector>

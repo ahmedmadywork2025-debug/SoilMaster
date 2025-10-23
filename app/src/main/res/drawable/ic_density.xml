@@ -4,7 +4,20 @@
     android:viewportWidth="24"
     android:viewportHeight="24"
     android:tint="?attr/colorControlNormal">
+    <!-- Professional Density Test Icon -->
     <path
-        android:fillColor="@android:color/black"
-        android:pathData="M3,3v18h18V3H3zM19,19H5V5h14v14zM7,7h2v2H7V7zm0,4h2v2H7v-2zm0,4h2v2H7v-2zm4,-8h2v2h-2V7zm0,4h2v2h-2v-2zm0,4h2v2h-2v-2zm4,-8h2v2h-2V7zm0,4h2v2h-2v-2z"/>
+        android:fillColor="@color/primaryColor"
+        android:pathData="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8z"/>
+    <!-- Density measurement scale -->
+    <path
+        android:fillColor="@color/textPrimary"
+        android:pathData="M8,6h8v1H8V6zM8,8h6v1H8V8zM8,10h4v1H8V10z"/>
+    <!-- Density values -->
+    <path
+        android:fillColor="@color/secondaryColor"
+        android:pathData="M9,12h1v4H9V12zM11,11h1v5h-1V11zM13,13h1v3h-1V13z"/>
+    <!-- Test container -->
+    <path
+        android:fillColor="@color/primaryVariant"
+        android:pathData="M7,16h10v2H7V16z"/>
 </vector>
