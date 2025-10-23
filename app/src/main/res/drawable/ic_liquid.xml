@@ -4,7 +4,27 @@
     android:viewportWidth="24"
     android:viewportHeight="24"
     android:tint="?attr/colorControlNormal">
+    <!-- Professional Liquid Limit Test Icon -->
     <path
-        android:fillColor="@android:color/black"
-        android:pathData="M12,3.1c-0.84,0 -1.68,0.34 -2.34,1L6.34,7.42C5.34,8.42 5,9.92 5,11.5 5,15.09 7.91,18 11.5,18h1c3.59,0 6.5,-2.91 6.5,-6.5 0,-1.58 -0.34,-3.08 -1.34,-4.08L14.34,4.1c-0.66,-0.66 -1.5,-1 -2.34,-1zM12.5,16h-1C9.01,16 7,13.99 7,11.5c0,-0.97 0.28,-1.88 0.88,-2.47L12,4.91l4.12,4.12c0.6,0.59 0.88,1.5 0.88,2.47C17,13.99 14.99,16 12.5,16z"/>
+        android:fillColor="@color/primaryColor"
+        android:pathData="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8z"/>
+    <!-- Test cup -->
+    <path
+        android:fillColor="@color/primaryVariant"
+        android:pathData="M8,8h8v6H8V8z"/>
+    <!-- Liquid drops -->
+    <path
+        android:fillColor="@color/secondaryColor"
+        android:pathData="M10,6c0,-1.1 0.9,-2 2,-2s2,0.9 2,2c0,0.55 -0.22,1.05 -0.59,1.41C13.05,7.78 12.55,8 12,8s-1.05,-0.22 -1.41,-0.59C10.22,7.05 10,6.55 10,6z"/>
+    <path
+        android:fillColor="@color/secondaryColor"
+        android:pathData="M14,6c0,-1.1 0.9,-2 2,-2s2,0.9 2,2c0,0.55 -0.22,1.05 -0.59,1.41C17.05,7.78 16.55,8 16,8s-1.05,-0.22 -1.41,-0.59C14.22,7.05 14,6.55 14,6z"/>
+    <!-- Test groove -->
+    <path
+        android:fillColor="@color/textPrimary"
+        android:pathData="M9,10h6v1H9V10z"/>
+    <!-- Blow count indicator -->
+    <path
+        android:fillColor="@color/textSecondary"
+        android:pathData="M6,16h12v1H6V16zM7,17h2v1H7V17zM9,17h2v1H9V17zM11,17h2v1h-2V17z"/>
 </vector>

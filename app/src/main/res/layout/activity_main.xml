@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="16dp"
+    android:background="@drawable/bg_gradient_main"
     tools:context=".MainActivity">
 
     <TextView
@@ -16,8 +17,9 @@
         android:text="اختبارات معمل التربة"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="#5D4037"
-        android:layout_marginBottom="24dp"/>
+        android:textColor="@color/textPrimary"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,65 +34,50 @@
 
             <Button
                 android:id="@+id/openTestButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/PrimaryButton"
                 android:text="Sand Cone Test"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#8D6E63"
-                android:textColor="@android:color/white"
-                android:padding="12dp"/>
+                android:drawableStart="@drawable/ic_sand"
+                android:drawablePadding="8dp"/>
 
             <Button
                 android:id="@+id/RelativeSand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/PrimaryButton"
                 android:text="Relative Density Test"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#8D6E63"
-                android:textColor="@android:color/white"
-                android:padding="12dp"/>
+                android:drawableStart="@drawable/ic_density"
+                android:drawablePadding="8dp"/>
 
             <Button
                 android:id="@+id/openLiquidLimitButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/PrimaryButton"
                 android:text="Liquid Limit Test"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#8D6E63"
-                android:textColor="@android:color/white"
-                android:padding="12dp"/>
+                android:drawableStart="@drawable/ic_liquid"
+                android:drawablePadding="8dp"/>
 
             <Button
                 android:id="@+id/classificationTestButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/PrimaryButton"
                 android:text="Classification Test"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#8D6E63"
-                android:textColor="@android:color/white"
-                android:padding="12dp"/>
+                android:drawableStart="@drawable/ic_classification"
+                android:drawablePadding="8dp"/>
 
             <Button
                 android:id="@+id/cbrtestbtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/PrimaryButton"
                 android:text="CBR Test"
-                android:backgroundTint="#8D6E63"
-                android:textColor="@android:color/white"
-                android:padding="12dp"/>
+                android:drawableStart="@drawable/ic_cbr"
+                android:drawablePadding="8dp"/>
 
         </LinearLayout>
     </ScrollView>
 
     <Button
         android:id="@+id/btnInfo"
+        style="@style/SecondaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="معلومات عنا"
         android:layout_marginTop="24dp"
-        app:icon="@android:drawable/ic_dialog_info"
-        app:iconGravity="textStart"
-        android:backgroundTint="#A1887F"
-        android:textColor="@android:color/white"/>
+        android:drawableStart="@drawable/ic_info"
+        android:drawablePadding="8dp"/>
 
 </LinearLayout>

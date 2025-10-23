@@ -4,7 +4,24 @@
     android:viewportWidth="24"
     android:viewportHeight="24"
     android:tint="?attr/colorControlNormal">
+    <!-- Professional CBR Test Icon with soil layers -->
     <path
-        android:fillColor="@android:color/black"
-        android:pathData="M5,9h3v10H5V9zm6,-4h3v14h-3V5zm6,8h3v6h-3v-6z"/>
+        android:fillColor="@color/primaryColor"
+        android:pathData="M3,3v18h18V3H3zM19,19H5V5h14v14z"/>
+    <!-- Soil layer 1 -->
+    <path
+        android:fillColor="@color/primaryVariant"
+        android:pathData="M5,5h14v3H5V5z"/>
+    <!-- Soil layer 2 -->
+    <path
+        android:fillColor="@color/secondaryColor"
+        android:pathData="M5,8h14v3H5V8z"/>
+    <!-- Soil layer 3 -->
+    <path
+        android:fillColor="@color/primaryVariant"
+        android:pathData="M5,11h14v3H5V11z"/>
+    <!-- Test bars -->
+    <path
+        android:fillColor="@color/textPrimary"
+        android:pathData="M7,15h2v2H7V15zM11,13h2v4h-2V13zM15,16h2v1h-2V16z"/>
 </vector>

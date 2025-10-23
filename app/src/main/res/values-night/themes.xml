@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Professional White Theme -->
+    <!-- Dark Mode Theme -->
     <style name="Theme.SandConeTest2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary Colors -->
         <item name="colorPrimary">@color/primaryColor</item>
@@ -23,7 +23,7 @@
         
         <!-- Navigation Bar -->
         <item name="android:navigationBarColor">@color/background</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightNavigationBar">false</item>
         
         <!-- Text Colors -->
         <item name="android:textColorPrimary">@color/textPrimary</item>
